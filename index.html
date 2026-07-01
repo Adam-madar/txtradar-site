@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>txtradar — scan anything, miss nothing</title>
+<meta name="description" content="txtradar highlights your funder and red-flag watch-lists across PDFs, statements, websites, Excel, Word, email, and scanned images — one tool for underwriting review." />
+<meta property="og:title" content="txtradar — scan anything, miss nothing" />
+<meta property="og:description" content="Highlight your watch-lists across every document you review. Built for MCA underwriting." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f6bff'/%3E%3Cg fill='none' stroke='white' stroke-width='1.6'%3E%3Ccircle cx='16' cy='16' r='9'/%3E%3Ccircle cx='16' cy='16' r='4.5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.8' fill='white'/%3E%3Cpath d='M16 16 L24 10' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f6f7f9; --card:#ffffff; --text:#161719; --muted:#5f636b;
+    --border:#e6e8eb; --accent:#2f6bff; --accent-soft:#e9f0ff; --accent-text:#1a4bd6;
+    --radius:12px; --maxw:1060px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#0f1012; --surface:#161719; --card:#17181b; --text:#e9eaed; --muted:#9297a1;
+      --border:#2a2c31; --accent:#4d8dff; --accent-soft:#182338; --accent-text:#9cc0ff; }
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  .btn{display:inline-flex; align-items:center; gap:7px; border-radius:var(--radius);
+    padding:12px 20px; font-size:15px; font-weight:500; cursor:pointer; text-decoration:none;
+    border:1px solid transparent; transition:background .15s,border-color .15s;}
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{filter:brightness(1.05);}
+  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border);}
+  .btn-ghost:hover{background:var(--surface);}
+
+  nav{display:flex; align-items:center; justify-content:space-between; padding:20px 0;}
+  .brand{display:flex; align-items:center; gap:10px; font-size:19px; font-weight:600; letter-spacing:-.01em;}
+  .logo{width:30px; height:30px; border-radius:9px; background:var(--accent); display:flex; align-items:center; justify-content:center;}
+  .navlinks{display:flex; align-items:center; gap:22px; font-size:14px; color:var(--muted);}
+  .navlinks a{text-decoration:none;}
+  .navlinks a:hover{color:var(--text);}
+
+  .hero{padding:64px 0 40px;}
+  .eyebrow{display:inline-block; font-size:13px; font-weight:500; color:var(--accent-text);
+    background:var(--accent-soft); padding:5px 12px; border-radius:20px; margin-bottom:22px;}
+  h1{font-size:56px; line-height:1.08; letter-spacing:-.03em; font-weight:600; margin:0 0 18px;}
+  .lede{font-size:19px; color:var(--muted); max-width:620px; margin:0 0 30px;}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  .cta-note{font-size:13px; color:var(--muted);}
+
+  .pills{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-top:44px; padding-top:28px; border-top:1px solid var(--border);}
+  .pills .label{font-size:13px; color:var(--muted); margin-right:4px;}
+  .pill{font-size:13px; font-weight:500; color:var(--muted); background:var(--surface);
+    border:1px solid var(--border); border-radius:20px; padding:5px 13px;}
+
+  section.block{padding:56px 0;}
+  h2{font-size:32px; letter-spacing:-.02em; font-weight:600; margin:0 0 10px;}
+  .sub{font-size:17px; color:var(--muted); max-width:640px; margin:0 0 36px;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px;}
+  .card .ico{width:38px; height:38px; border-radius:10px; background:var(--accent-soft); color:var(--accent-text);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .card h3{font-size:17px; font-weight:600; margin:0 0 6px;}
+  .card p{font-size:14px; color:var(--muted); margin:0;}
+
+  .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;}
+  .step .n{font-size:13px; font-weight:600; color:var(--accent-text); background:var(--accent-soft);
+    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
+  .step h3{font-size:16px; font-weight:600; margin:0 0 5px;}
+  .step p{font-size:14px; color:var(--muted); margin:0;}
+
+  .cta-band{background:var(--surface); border:1px solid var(--border); border-radius:20px;
+    padding:44px; text-align:center; margin:20px 0 60px;}
+  .cta-band h2{margin-bottom:8px;}
+  .cta-band p{color:var(--muted); font-size:17px; margin:0 0 24px;}
+
+  footer{border-top:1px solid var(--border); padding:28px 0 48px; font-size:13px; color:var(--muted);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+
+  @media (max-width:640px){
+    h1{font-size:40px;} .hero{padding:40px 0 28px;} .navlinks{display:none;}
+    .cta-band{padding:32px 20px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="brand">
+      <span class="logo">
+        <svg width="19" height="19" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true">
+          <circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4.5"/>
+          <circle cx="16" cy="16" r="1.6" fill="#fff" stroke="none"/>
+          <path d="M16 16 L24 10" stroke-linecap="round"/>
+        </svg>
+      </span>
+      txtradar
+    </div>
+    <div class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#formats">Formats</a>
+      <a href="#features">Features</a>
+      <a class="btn btn-primary" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Add to Chrome</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="eyebrow">Built for MCA underwriting</span>
+    <h1>Scan anything.<br>Miss nothing.</h1>
+    <p class="lede">txtradar highlights your funder and red-flag watch-lists across every document you review — bank statements, CRM pages, spreadsheets, agreements, even photos — so nothing slips through.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#get">Add to Chrome — free</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+      <span class="cta-note">Works on PDFs, websites, and files. No setup.</span>
+    </div>
+    <div class="pills">
+      <span class="label">one tool reads them all</span>
+      <span class="pill">PDF</span><span class="pill">Website</span><span class="pill">Excel</span>
+      <span class="pill">CSV</span><span class="pill">Word</span><span class="pill">Email</span><span class="pill">Images (OCR)</span>
+    </div>
+  </header>
+
+  <section class="block" id="features">
+    <h2>See the flags you'd scroll past</h2>
+    <p class="sub">Build watch-lists once. txtradar applies them everywhere you underwrite.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 12 L18 8"/></svg>
+        </div>
+        <h3>Live highlighting</h3>
+        <p>PDFs and web pages light up as you read, with click-to-jump navigation to every hit.</p>
+      </div>
+      <div class="card">
+        <div class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.5 16.5 L15.5 18.5"/></svg>
+        </div>
+        <h3>Any file, one report</h3>
+        <p>Drop statements in any format — Excel, CSV, Word, email, or a scanned image — and get findings plus an Excel export.</p>
+      </div>
+      <div class="card">
+        <div class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/></svg>
+        </div>
+        <h3>AI triage</h3>
+        <p>Get a risk summary, flagged transactions rated by severity, and suggested new watch words.</p>
+      </div>
+      <div class="card">
+        <div class="ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/><circle cx="18" cy="16" r="3"/><path d="M20.5 18.5 L22 20"/></svg>
+        </div>
+        <h3>Catches what you'd miss</h3>
+        <p>OCR-typo tolerance flags <code>0verdraft</code> and <code>Overdaft</code>; aliases catch every spelling of a funder.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <h2>From statement to red flags in seconds</h2>
+    <p class="sub">No modes to switch. txtradar detects what you're looking at and applies your active watch-lists automatically.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Build watch-lists by purpose</h3><p>MCA Underwriting, Fraud, Compliance — funders, red-flag terms, merchant names.</p></div>
+      <div class="step"><div class="n">2</div><h3>Open what you're reviewing</h3><p>A PDF, a CRM page, or a folder of mixed files. Turn on automatic scanning to work as you browse.</p></div>
+      <div class="step"><div class="n">3</div><h3>Act on the flags</h3><p>Jump to every hit, read the AI triage, export a findings report — and fund with confidence.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="formats">
+    <h2>One scanner for every document</h2>
+    <p class="sub">Statements arrive in every shape. txtradar reads them all, then runs the same watch-lists across each.</p>
+    <div class="grid">
+      <div class="card"><h3>PDF &amp; Website</h3><p>Highlighted live in place, with a floating panel of category counts and prev/next jump.</p></div>
+      <div class="card"><h3>Excel, CSV &amp; Word</h3><p>Extracted and matched across sheets and pages, grouped into a findings view.</p></div>
+      <div class="card"><h3>Email &amp; Images</h3><p>MIME emails and scanned or photographed statements (OCR) — flagged just like the rest.</p></div>
+    </div>
+  </section>
+
+  <section id="get">
+    <div class="cta-band">
+      <h2>Put every statement on your radar</h2>
+      <p>Free to install. Built by underwriters, for underwriters.</p>
+      <a class="btn btn-primary" href="#" style="font-size:16px; padding:13px 24px;">Add to Chrome — free</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="yr"></span> txtradar</div>
+    <div>Scan anything. Miss nothing.</div>
+  </footer>
+
+</div>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
