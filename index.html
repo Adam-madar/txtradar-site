@@ -8,6 +8,8 @@
 <meta property="og:title" content="txtradar — scan anything, miss nothing" />
 <meta property="og:description" content="Highlight your watch-lists across every document you review. Built for MCA underwriting." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://txtradar.com" />
+<link rel="canonical" href="https://txtradar.com" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f6bff'/%3E%3Cg fill='none' stroke='white' stroke-width='1.6'%3E%3Ccircle cx='16' cy='16' r='9'/%3E%3Ccircle cx='16' cy='16' r='4.5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.8' fill='white'/%3E%3Cpath d='M16 16 L24 10' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -106,7 +108,7 @@
       <a href="#how">How it works</a>
       <a href="#formats">Formats</a>
       <a href="#features">Features</a>
-      <a class="btn btn-primary" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Add to Chrome</a>
+      <a class="btn btn-primary cta-install" data-live="Add to Chrome" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Coming soon</a>
     </div>
   </nav>
 
@@ -115,9 +117,9 @@
     <h1>Scan anything.<br>Miss nothing.</h1>
     <p class="lede">txtradar highlights your funder and red-flag watch-lists across every document you review — bank statements, CRM pages, spreadsheets, agreements, even photos — so nothing slips through.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#get">Add to Chrome — free</a>
+      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#get">Coming soon</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
-      <span class="cta-note">Works on PDFs, websites, and files. No setup.</span>
+      <span class="cta-note soon-note">Coming soon to the Chrome Web Store.</span>
     </div>
     <div class="pills">
       <span class="label">one tool reads them all</span>
@@ -185,7 +187,8 @@
     <div class="cta-band">
       <h2>Put every statement on your radar</h2>
       <p>Free to install. Built by underwriters, for underwriters.</p>
-      <a class="btn btn-primary" href="#" style="font-size:16px; padding:13px 24px;">Add to Chrome — free</a>
+      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#" style="font-size:16px; padding:13px 24px;">Coming soon</a>
+      <p class="soon-note" style="margin-top:16px;">Coming soon to the Chrome Web Store — check back shortly.</p>
     </div>
   </section>
 
@@ -195,6 +198,23 @@
   </footer>
 
 </div>
-<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script>
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* When the extension is published, paste the Chrome Web Store URL below and
+     redeploy — every CTA flips from "Coming soon" to a live install link, and
+     the "coming soon" notes hide. No other edits needed. */
+  var STORE_URL = "";
+
+  if (STORE_URL) {
+    document.querySelectorAll(".cta-install").forEach(function (a) {
+      a.textContent = a.dataset.live || "Add to Chrome";
+      a.href = STORE_URL;
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+    document.querySelectorAll(".soon-note").forEach(function (n) { n.style.display = "none"; });
+  }
+</script>
 </body>
 </html>
