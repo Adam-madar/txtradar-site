@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" width="360" height="320" role="img" aria-label="txtradar">
+  <defs>
+    <radialGradient id="lssD" cx="50%" cy="45%" r="72%">
+      <stop offset="0%" stop-color="#16241d"/><stop offset="72%" stop-color="#0a0d12"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(90,20)">
+    <circle cx="90" cy="90" r="90" fill="url(#lssD)"/>
+    <g fill="none" stroke="#69dc96" stroke-opacity="0.34" stroke-width="2">
+      <circle cx="90" cy="90" r="75"/><circle cx="90" cy="90" r="54"/><circle cx="90" cy="90" r="33"/>
+      <line x1="15" y1="90" x2="165" y2="90"/><line x1="90" y1="15" x2="90" y2="165"/>
+      <line x1="36" y1="36" x2="144" y2="144"/><line x1="144" y1="36" x2="36" y2="144"/>
+    </g>
+    <path d="M90 90 L90 15 A75 75 0 0 1 156 54 Z" fill="#6ef096" fill-opacity="0.26"/>
+    <circle cx="132" cy="129" r="6.3" fill="#ef9f27"/><circle cx="51" cy="138" r="5.4" fill="#5aa6ff"/>
+    <circle cx="90" cy="90" r="12" fill="#7dffb0"/>
+  </g>
+  <text x="180" y="292" text-anchor="middle" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="58" font-weight="600" letter-spacing="-1.5" fill="#161719">txtradar</text>
+</svg>

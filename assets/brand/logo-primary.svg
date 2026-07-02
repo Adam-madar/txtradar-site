@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180" width="700" height="180" role="img" aria-label="txtradar">
+  <defs>
+    <radialGradient id="lpD" cx="50%" cy="45%" r="72%">
+      <stop offset="0%" stop-color="#16241d"/><stop offset="72%" stop-color="#0a0d12"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(20,30)">
+    <circle cx="60" cy="60" r="60" fill="url(#lpD)"/>
+    <g fill="none" stroke="#69dc96" stroke-opacity="0.34" stroke-width="1.5">
+      <circle cx="60" cy="60" r="50"/><circle cx="60" cy="60" r="36"/><circle cx="60" cy="60" r="22"/>
+      <line x1="10" y1="60" x2="110" y2="60"/><line x1="60" y1="10" x2="60" y2="110"/>
+      <line x1="24" y1="24" x2="96" y2="96"/><line x1="96" y1="24" x2="24" y2="96"/>
+    </g>
+    <path d="M60 60 L60 10 A50 50 0 0 1 104 36 Z" fill="#6ef096" fill-opacity="0.26"/>
+    <circle cx="88" cy="86" r="4.2" fill="#ef9f27"/><circle cx="34" cy="92" r="3.6" fill="#5aa6ff"/>
+    <circle cx="60" cy="60" r="8" fill="#7dffb0"/>
+  </g>
+  <text x="168" y="122" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="86" font-weight="600" letter-spacing="-2" fill="#161719">txtradar</text>
+</svg>
