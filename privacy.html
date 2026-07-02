@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>txtradar — Privacy Policy</title>
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://txtradar.com/privacy" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{ --bg:#ffffff; --text:#161719; --muted:#5f636b; --border:#e6e8eb; --accent:#0ea968; --card:#f6f7f9; }
+  @media (prefers-color-scheme:dark){ :root{ --bg:#0f1012; --text:#e9eaed; --muted:#9297a1; --border:#2a2c31; --accent:#28c987; --card:#161719; } }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.7;}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  a{color:var(--accent);}
+  h1{font-size:34px;letter-spacing:-.02em;margin:0 0 6px;}
+  .updated{color:var(--muted);font-size:14px;margin:0 0 32px;}
+  h2{font-size:20px;letter-spacing:-.01em;margin:36px 0 8px;}
+  p,li{font-size:16px;color:var(--text);}
+  li{margin:4px 0;}
+  .muted{color:var(--muted);}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:16px 0;}
+  .back{display:inline-block;margin-bottom:24px;font-size:14px;color:var(--muted);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">← txtradar.com</a>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: July 2026</p>
+
+  <p>txtradar is a browser extension that highlights your watch-list words across documents and web pages you review. This policy explains what we collect, how it is used, and the choices you have. We do not sell your data, and we do not use it for advertising.</p>
+
+  <h2>What txtradar stores</h2>
+  <ul>
+    <li><strong>Account details</strong> — if you create an account, your email address and an encrypted password (handled by our authentication provider, Supabase).</li>
+    <li><strong>Your watch-lists and notes</strong> — the categories, words, aliases, and notes you create. These sync to your account so they are available across your devices.</li>
+    <li><strong>Shared-list data</strong> — if you share a list, its contents and the email/role of invited teammates are stored so the team can use it. Each added word records the contributor's name and date.</li>
+    <li><strong>Limited usage counts</strong> — for AI features we keep per-day counts to enforce rate limits.</li>
+  </ul>
+
+  <h2>Document and page content</h2>
+  <div class="card">
+    <p style="margin:0;">Highlighting happens <strong>locally in your browser</strong>. The text of the PDFs, files, and web pages you scan is <strong>not sent to our servers</strong> for ordinary highlighting or file scanning.</p>
+  </div>
+  <p>The only time text leaves your device is when <strong>you explicitly use an AI feature</strong> (e.g. "AI triage" or "suggest aliases"). In that case the relevant text is sent through our secure server function to an AI provider (Anthropic) to generate the result, and is not used to train models. AI features are limited to enabled accounts.</p>
+
+  <h2>How we use your information</h2>
+  <ul>
+    <li>To provide the core features — saving, syncing, and applying your watch-lists and notes.</li>
+    <li>To enable shared lists among the teammates you invite.</li>
+    <li>To operate AI features you choose to use, and to rate-limit them.</li>
+    <li>To secure the service and prevent abuse.</li>
+  </ul>
+
+  <h2>Storage and processing</h2>
+  <p>Account data, watch-lists, notes, and shared lists are stored with <strong>Supabase</strong> (our hosting and database provider) and protected by row-level security so you can only access your own data (and lists shared with you). Local copies are kept in your browser's storage for offline use.</p>
+
+  <h2>Permissions</h2>
+  <ul>
+    <li><strong>Storage</strong> — save your lists, notes, and settings.</li>
+    <li><strong>Host access / scripting</strong> — read page text locally to highlight your words, and highlight PDFs in the viewer.</li>
+    <li><strong>Tabs / webNavigation / webRequest</strong> — detect PDFs and the current page so scanning works automatically.</li>
+    <li><strong>Context menus</strong> — right-click options to scan or add words.</li>
+  </ul>
+  <p class="muted">txtradar does not collect browsing history, and it only acts on pages when you enable scanning.</p>
+
+  <h2>Data sharing</h2>
+  <p>We do not sell or rent your data. We share information only with the service providers needed to run txtradar (Supabase for hosting/auth; Anthropic for AI features you invoke), and only as required to provide the service or comply with law.</p>
+
+  <h2>Retention and your choices</h2>
+  <ul>
+    <li>You can edit or delete your watch-lists and notes at any time in the extension.</li>
+    <li>You can request deletion of your account and associated data by emailing us.</li>
+    <li>Deleted items may be retained briefly in backups before being purged.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>txtradar is a business tool and is not directed to children under 13.</p>
+
+  <h2>Changes</h2>
+  <p>We may update this policy; material changes will be reflected by the "Last updated" date above.</p>
+
+  <h2>Contact</h2>
+  <p>Questions or data requests: <a href="mailto:adam@adammadar.com">adam@adammadar.com</a>.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" width="1400" height="560" role="img" aria-label="txtradar — scan anything, miss nothing">
+  <defs>
+    <radialGradient id="pm" cx="50%" cy="45%" r="72%"><stop offset="0%" stop-color="#16241d"/><stop offset="72%" stop-color="#0a0d12"/></radialGradient>
+  </defs>
+  <rect width="1400" height="560" fill="#0f1012"/>
+
+  <g transform="translate(1010,90)">
+    <circle cx="190" cy="190" r="190" fill="url(#pm)"/>
+    <g fill="none" stroke="#69dc96" stroke-opacity="0.30" stroke-width="2">
+      <circle cx="190" cy="190" r="159"/><circle cx="190" cy="190" r="114"/><circle cx="190" cy="190" r="70"/><circle cx="190" cy="190" r="27"/>
+      <line x1="27" y1="190" x2="353" y2="190"/><line x1="190" y1="27" x2="190" y2="353"/>
+      <line x1="74" y1="74" x2="306" y2="306"/><line x1="306" y1="74" x2="74" y2="306"/>
+    </g>
+    <path d="M190 190 L190 31 A159 159 0 0 1 330 114 Z" fill="#6ef096" fill-opacity="0.26"/>
+    <circle cx="270" cy="270" r="10" fill="#ef9f27"/><circle cx="96" cy="250" r="9" fill="#5aa6ff"/><circle cx="245" cy="120" r="8" fill="#4cd07d"/>
+    <circle cx="190" cy="190" r="22" fill="#7dffb0" fill-opacity="0.35"/><circle cx="190" cy="190" r="11" fill="#7dffb0"/>
+  </g>
+
+  <g transform="translate(96,96)">
+    <circle cx="26" cy="26" r="26" fill="url(#pm)"/>
+    <g fill="none" stroke="#69dc96" stroke-opacity="0.4" stroke-width="1"><circle cx="26" cy="26" r="21.5"/><circle cx="26" cy="26" r="12"/><line x1="4.5" y1="26" x2="47.5" y2="26"/><line x1="26" y1="4.5" x2="26" y2="47.5"/></g>
+    <path d="M26 26 L26 4.5 A21.5 21.5 0 0 1 45 15.5 Z" fill="#6ef096" fill-opacity="0.3"/><circle cx="26" cy="26" r="3.8" fill="#7dffb0"/>
+    <text x="66" y="38" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="600" letter-spacing="-1" fill="#ffffff">txtradar</text>
+  </g>
+
+  <text x="96" y="300" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="600" letter-spacing="-2" fill="#ffffff">Scan anything.</text>
+  <text x="96" y="382" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="600" letter-spacing="-2" fill="#ffffff">Miss nothing.</text>
+  <text x="98" y="440" font-family="Inter, system-ui, sans-serif" font-size="27" fill="#9aa0ab">The watch-list scanner for everything you review.</text>
+  <text x="98" y="484" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="500" fill="#28c987">Free Chrome extension  ·  txtradar.com</text>
+</svg>
