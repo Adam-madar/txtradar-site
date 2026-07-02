@@ -4,12 +4,36 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>txtradar — scan anything, miss nothing</title>
-<meta name="description" content="txtradar highlights your funder and red-flag watch-lists across PDFs, statements, websites, Excel, Word, email, and scanned images — one tool for underwriting review." />
+<meta name="description" content="txtradar highlights your watch-list words — funders, clauses, red flags, names, keywords — across PDFs, websites, Excel, Word, email, and scanned images. One tool for anyone who reviews documents." />
 <meta property="og:title" content="txtradar — scan anything, miss nothing" />
-<meta property="og:description" content="Highlight your watch-lists across every document you review. Built for MCA underwriting." />
+<meta property="og:description" content="Highlight your watch-list words across every document you review — PDFs, websites, spreadsheets, contracts, email, and images." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://txtradar.com" />
 <link rel="canonical" href="https://txtradar.com" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://txtradar.com/#org",
+      "name": "txtradar",
+      "url": "https://txtradar.com",
+      "description": "A universal watch-list scanner that highlights the words you care about across every document you review."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "txtradar",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Chrome",
+      "url": "https://txtradar.com",
+      "publisher": { "@id": "https://txtradar.com/#org" },
+      "description": "txtradar highlights your watch-list words — funders, clauses, red flags, names, keywords — across PDFs, websites, Excel, Word, email, and scanned images (OCR), with an AI summary and one-click findings report.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f6bff'/%3E%3Cg fill='none' stroke='white' stroke-width='1.6'%3E%3Ccircle cx='16' cy='16' r='9'/%3E%3Ccircle cx='16' cy='16' r='4.5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.8' fill='white'/%3E%3Cpath d='M16 16 L24 10' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -106,6 +130,7 @@
     </div>
     <div class="navlinks">
       <a href="#how">How it works</a>
+      <a href="#who">Who it's for</a>
       <a href="#formats">Formats</a>
       <a href="#features">Features</a>
       <a class="btn btn-primary cta-install" data-live="Add to Chrome" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Coming soon</a>
@@ -113,9 +138,9 @@
   </nav>
 
   <header class="hero">
-    <span class="eyebrow">Built for MCA underwriting</span>
+    <span class="eyebrow">For everyone who reviews documents</span>
     <h1>Scan anything.<br>Miss nothing.</h1>
-    <p class="lede">txtradar highlights your funder and red-flag watch-lists across every document you review — bank statements, CRM pages, spreadsheets, agreements, even photos — so nothing slips through.</p>
+    <p class="lede">txtradar highlights your watch-list words — funders, clauses, red flags, names, keywords — across every document you review. Bank statements, contracts, web pages, spreadsheets, even photos. Nothing slips through.</p>
     <div class="cta-row">
       <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#get">Coming soon</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
@@ -129,8 +154,8 @@
   </header>
 
   <section class="block" id="features">
-    <h2>See the flags you'd scroll past</h2>
-    <p class="sub">Build watch-lists once. txtradar applies them everywhere you underwrite.</p>
+    <h2>See the words you'd scroll past</h2>
+    <p class="sub">Build watch-lists once. txtradar applies them everywhere you read.</p>
     <div class="grid">
       <div class="card">
         <div class="ico">
@@ -144,49 +169,60 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.5 16.5 L15.5 18.5"/></svg>
         </div>
         <h3>Any file, one report</h3>
-        <p>Drop statements in any format — Excel, CSV, Word, email, or a scanned image — and get findings plus an Excel export.</p>
+        <p>Drop documents in any format — Excel, CSV, Word, email, or a scanned image — and get findings plus an Excel export.</p>
       </div>
       <div class="card">
         <div class="ico">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/></svg>
         </div>
         <h3>AI triage</h3>
-        <p>Get a risk summary, flagged transactions rated by severity, and suggested new watch words.</p>
+        <p>Get a plain-English summary, key passages rated by importance, and suggested new watch words.</p>
       </div>
       <div class="card">
         <div class="ico">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/><circle cx="18" cy="16" r="3"/><path d="M20.5 18.5 L22 20"/></svg>
         </div>
         <h3>Catches what you'd miss</h3>
-        <p>OCR-typo tolerance flags <code>0verdraft</code> and <code>Overdaft</code>; aliases catch every spelling of a funder.</p>
+        <p>OCR-typo tolerance flags <code>0verdraft</code> and <code>Overdaft</code>; aliases catch every spelling of a name or term.</p>
       </div>
     </div>
   </section>
 
   <section class="block" id="how">
-    <h2>From statement to red flags in seconds</h2>
+    <h2>From document to answers in seconds</h2>
     <p class="sub">No modes to switch. txtradar detects what you're looking at and applies your active watch-lists automatically.</p>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h3>Build watch-lists by purpose</h3><p>MCA Underwriting, Fraud, Compliance — funders, red-flag terms, merchant names.</p></div>
-      <div class="step"><div class="n">2</div><h3>Open what you're reviewing</h3><p>A PDF, a CRM page, or a folder of mixed files. Turn on automatic scanning to work as you browse.</p></div>
-      <div class="step"><div class="n">3</div><h3>Act on the flags</h3><p>Jump to every hit, read the AI triage, export a findings report — and fund with confidence.</p></div>
+      <div class="step"><div class="n">1</div><h3>Build watch-lists by purpose</h3><p>Underwriting, contract review, compliance — funders, clauses, terms, names, keywords.</p></div>
+      <div class="step"><div class="n">2</div><h3>Open what you're reviewing</h3><p>A PDF, a web page, or a folder of mixed files. Turn on automatic scanning to work as you browse.</p></div>
+      <div class="step"><div class="n">3</div><h3>Act on what you find</h3><p>Jump to every hit, read the AI summary, export a findings report — and decide with confidence.</p></div>
     </div>
   </section>
 
   <section class="block" id="formats">
     <h2>One scanner for every document</h2>
-    <p class="sub">Statements arrive in every shape. txtradar reads them all, then runs the same watch-lists across each.</p>
+    <p class="sub">Documents arrive in every shape. txtradar reads them all, then runs the same watch-lists across each.</p>
     <div class="grid">
       <div class="card"><h3>PDF &amp; Website</h3><p>Highlighted live in place, with a floating panel of category counts and prev/next jump.</p></div>
       <div class="card"><h3>Excel, CSV &amp; Word</h3><p>Extracted and matched across sheets and pages, grouped into a findings view.</p></div>
-      <div class="card"><h3>Email &amp; Images</h3><p>MIME emails and scanned or photographed statements (OCR) — flagged just like the rest.</p></div>
+      <div class="card"><h3>Email &amp; Images</h3><p>MIME emails and scanned or photographed pages (OCR) — flagged just like the rest.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="who">
+    <h2>Made for anyone who reads for a living</h2>
+    <p class="sub">Same engine, different watch-lists. Start with the words that matter to your work.</p>
+    <div class="grid">
+      <div class="card"><h3>Underwriting &amp; lending</h3><p>Competing funders, NSFs, overdrafts, stacking, merchant names across bank statements.</p></div>
+      <div class="card"><h3>Legal &amp; contracts</h3><p>Defined terms, party names, indemnity and liability clauses, risky language.</p></div>
+      <div class="card"><h3>Compliance &amp; risk</h3><p>Prohibited terms, sanctioned entities, and policy keywords across filings and reports.</p></div>
+      <div class="card"><h3>Research &amp; writing</h3><p>Names, citations, overused words, or banned phrases across drafts and sources.</p></div>
     </div>
   </section>
 
   <section id="get">
     <div class="cta-band">
-      <h2>Put every statement on your radar</h2>
-      <p>Free to install. Built by underwriters, for underwriters.</p>
+      <h2>Put every document on your radar</h2>
+      <p>Free to install. For anyone who reads for a living.</p>
       <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#" style="font-size:16px; padding:13px 24px;">Coming soon</a>
       <p class="soon-note" style="margin-top:16px;">Coming soon to the Chrome Web Store — check back shortly.</p>
     </div>
