@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" width="1584" height="396" role="img" aria-label="txtradar — scan anything, miss nothing">
+  <rect width="1584" height="396" fill="#0f1012"/>
+
+  <g fill="none" stroke="#0ea968" stroke-opacity="0.14" stroke-width="2">
+    <circle cx="90" cy="198" r="150"/><circle cx="90" cy="198" r="250"/>
+    <circle cx="1494" cy="198" r="150"/><circle cx="1494" cy="198" r="250"/><circle cx="1494" cy="198" r="350"/>
+  </g>
+
+  <g transform="translate(766,60)">
+    <rect width="52" height="52" rx="14" fill="#0ea968"/>
+    <g fill="none" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" transform="scale(0.1016)">
+      <circle cx="256" cy="256" r="158"/><circle cx="256" cy="256" r="104"/><circle cx="256" cy="256" r="50"/>
+      <path d="M256 256 L390 178"/>
+    </g>
+  </g>
+
+  <text x="792" y="158" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="600" letter-spacing="-1" fill="#ffffff">txtradar</text>
+  <text x="792" y="240" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="62" font-weight="600" letter-spacing="-1.5" fill="#ffffff">Scan anything. Miss nothing.</text>
+  <text x="792" y="288" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="400" fill="#9aa0ab">The watch-list scanner for everything you review — PDFs, sites, files, images.</text>
+  <text x="792" y="332" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500" fill="#28c987">Free Chrome extension — coming soon  ·  txtradar.com</text>
+</svg>
