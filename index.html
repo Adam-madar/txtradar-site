@@ -108,9 +108,39 @@
   footer{border-top:1px solid var(--border); padding:28px 0 48px; font-size:13px; color:var(--muted);
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
 
+  /* demo preview */
+  .demo{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+  .demo .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
+  .demo .dot3{width:10px;height:10px;border-radius:50%;background:var(--border);}
+  .demo .url{margin-left:8px;font-size:12px;color:var(--muted);}
+  .demo .body{display:flex;}
+  .demo .doc{flex:1;padding:20px 22px;font-size:13.5px;line-height:2;min-width:0;}
+  .demo .doc .row{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .demo mark{border-radius:4px;padding:0 3px;background:rgba(14,169,104,0.18);border:1px solid rgba(14,169,104,0.6);color:inherit;}
+  .demo mark.b{background:rgba(129,140,248,0.18);border-color:rgba(129,140,248,0.7);}
+  .demo mark.r{background:rgba(226,75,74,0.16);border-color:rgba(226,75,74,0.6);}
+  .demo .panel{flex:none;width:212px;border-left:1px solid var(--border);padding:14px;background:var(--surface);}
+  .demo .panel .ph{display:flex;align-items:center;justify-content:space-between;font-weight:500;font-size:13px;margin-bottom:10px;}
+  .demo .panel .pr{display:flex;align-items:center;gap:8px;font-size:13px;padding:5px 0;color:var(--muted);}
+  .demo .panel .sw{width:10px;height:10px;border-radius:3px;flex:none;}
+  /* faq */
+  .faq{max-width:760px;}
+  .faq details{border-top:1px solid var(--border);padding:14px 2px;}
+  .faq details:last-child{border-bottom:1px solid var(--border);}
+  .faq summary{cursor:pointer;font-weight:500;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";color:var(--muted);font-size:20px;flex:none;}
+  .faq details[open] summary::after{content:"\2013";}
+  .faq p{color:var(--muted);font-size:15px;margin:10px 0 2px;}
+  /* testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+  .quote{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;}
+  .quote .stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px;}
+  .quote p{font-size:15px;margin:0 0 14px;}
+  .quote .who{font-size:13px;color:var(--muted);}
   @media (max-width:640px){
     h1{font-size:40px;} .hero{padding:40px 0 28px;} .navlinks{display:none;}
-    .cta-band{padding:32px 20px;}
+    .cta-band{padding:32px 20px;} .demo .panel{display:none;}
   }
 </style>
 </head>
@@ -147,6 +177,31 @@
       <span class="pill">CSV</span><span class="pill">Word</span><span class="pill">Email</span><span class="pill">Images (OCR)</span>
     </div>
   </header>
+
+  <section class="block" id="demo">
+    <h2>See it in action</h2>
+    <p class="sub">Your watch-list words light up right where you're reading — with a live tally beside them.</p>
+    <div class="demo">
+      <div class="bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="url">bank statement · page 3</span></div>
+      <div class="body">
+        <div class="doc">
+          <div class="row">03/04&nbsp; ACH DEBIT&nbsp; <mark class="b">SPECIALTY CAPITAL</mark> DES:WEEKLY&nbsp; −3,324.75</div>
+          <div class="row">03/06&nbsp; <mark>OVERDRAFT</mark> ITEM FEE&nbsp; −35.00</div>
+          <div class="row">03/09&nbsp; <mark class="b">HUNTER CAROLINE</mark> DES:CAPITAL 71&nbsp; −1,013.63</div>
+          <div class="row">03/11&nbsp; MERCHANT SERVICE&nbsp; <mark class="r">MERCH CHBK</mark>&nbsp; −580.00</div>
+          <div class="row">03/14&nbsp; RETURN OF POSTED CHECK&nbsp; +7,970.82</div>
+          <div class="row">03/18&nbsp; ZELLE PAYMENT TO INDIVIDUAL&nbsp; −5,000.00</div>
+          <div class="row">03/22&nbsp; <mark>NSF</mark> RETURNED ITEM&nbsp; −12.00</div>
+        </div>
+        <div class="panel">
+          <div class="ph"><span>🛰 MCA Underwriting</span><span>6</span></div>
+          <div class="pr"><span class="sw" style="background:#818cf8"></span>Funders <span style="margin-left:auto">2</span></div>
+          <div class="pr"><span class="sw" style="background:#0ea968"></span>Overdraft / NSF <span style="margin-left:auto">3</span></div>
+          <div class="pr"><span class="sw" style="background:#e24b4a"></span>Chargebacks <span style="margin-left:auto">1</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="block" id="features">
     <h2>See the words you'd scroll past</h2>
@@ -211,6 +266,29 @@
       <div class="card"><h3>Legal &amp; contracts</h3><p>Defined terms, party names, indemnity and liability clauses, risky language.</p></div>
       <div class="card"><h3>Compliance &amp; risk</h3><p>Prohibited terms, sanctioned entities, and policy keywords across filings and reports.</p></div>
       <div class="card"><h3>Research &amp; writing</h3><p>Names, citations, overused words, or banned phrases across drafts and sources.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Questions</h2>
+    <div class="faq">
+      <details><summary>Does txtradar send my documents anywhere?</summary><p>No. Highlighting and file scanning happen locally in your browser — the text of your PDFs, files, and pages is not sent to our servers. Text only leaves your device if you explicitly use an AI feature, which runs through a secure endpoint. See the <a href="/privacy">privacy policy</a>.</p></details>
+      <details><summary>What can it scan?</summary><p>PDFs and web pages (highlighted live, click-to-jump), plus Excel, CSV, Word, email, and images via OCR — each producing a findings view and an Excel report.</p></details>
+      <details><summary>Do I have to pick a mode?</summary><p>No. txtradar detects what you're looking at and applies your active watch-lists automatically. Each list can declare which media it runs on.</p></details>
+      <details><summary>Can my team share a watch-list?</summary><p>Yes. Shared lists sync in real time with roles (viewer, contributor, editor, owner) and per-word attribution so you can see who added what.</p></details>
+      <details><summary>Is it free?</summary><p>Yes — free to install, and your lists sync to your account across devices.</p></details>
+      <details><summary>Which browsers are supported?</summary><p>Chrome and Chromium-based browsers. Launching on the Chrome Web Store soon.</p></details>
+    </div>
+  </section>
+
+  <!-- Testimonials: remove style="display:none" to publish once you have REAL quotes. Placeholders below. -->
+  <section class="block" id="loved" style="display:none">
+    <h2>Loved by people who review all day</h2>
+    <p class="sub">Replace these with real quotes from your early users.</p>
+    <div class="quotes">
+      <div class="quote"><div class="stars">★★★★★</div><p>"Placeholder quote about how much time txtradar saves on statement review."</p><div class="who">— Name, Role · Company</div></div>
+      <div class="quote"><div class="stars">★★★★★</div><p>"Placeholder quote about catching a stacked funder we'd have missed."</p><div class="who">— Name, Role · Company</div></div>
+      <div class="quote"><div class="stars">★★★★★</div><p>"Placeholder quote about scanning contracts and spreadsheets in one tool."</p><div class="who">— Name, Role · Company</div></div>
     </div>
   </section>
 
