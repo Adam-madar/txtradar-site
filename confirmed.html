@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Email confirmed — txtradar</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f6f7f9; --text:#161719; --muted:#5f636b;
+    --border:#e6e8eb; --accent:#0ea968; --accent-soft:#e4f7ee; --accent-text:#0a7a4d;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#0f1012; --surface:#161719; --text:#e9eaed; --muted:#9297a1;
+      --border:#2a2c31; --accent:#28c987; --accent-soft:#123023; --accent-text:#8ce9bd; }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); min-height:100vh;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.6;}
+  .card{max-width:440px; width:100%; text-align:center; background:var(--surface);
+    border:1px solid var(--border); border-radius:20px; padding:44px 36px;}
+  .check{width:64px; height:64px; border-radius:50%; background:var(--accent-soft);
+    color:var(--accent-text); display:flex; align-items:center; justify-content:center;
+    margin:0 auto 20px; font-size:30px;}
+  h1{font-size:26px; letter-spacing:-.02em; font-weight:600; margin:0 0 10px;}
+  p{font-size:15px; color:var(--muted); margin:0 0 8px;}
+  ol{text-align:left; font-size:15px; color:var(--muted); margin:18px auto 4px; padding-left:22px; max-width:330px;}
+  ol li{margin-bottom:8px;}
+  b{color:var(--text); font-weight:600;}
+  .brand{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:26px;
+    font-size:14px; font-weight:600; color:var(--muted);}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>Email confirmed</h1>
+    <p>Your txtradar account is ready.</p>
+    <ol>
+      <li>Go back to <b>Chrome</b></li>
+      <li>Click the <b>txtradar icon</b> in the toolbar</li>
+      <li><b>Sign in</b> with your email and password</li>
+    </ol>
+    <div class="brand">
+      <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="#0b1310"/>
+        <g fill="none" stroke="#69dc96" stroke-opacity="0.6" stroke-width="1.6"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="6"/></g>
+        <path d="M16 16 L16 3 A13 13 0 0 1 27 9 Z" fill="#6ef096" fill-opacity="0.35"/>
+        <circle cx="16" cy="16" r="2.4" fill="#7dffb0"/>
+      </svg>
+      txtradar
+    </div>
+  </div>
+</body>
+</html>
