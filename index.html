@@ -111,6 +111,11 @@
     padding:44px; text-align:center; margin:20px 0 60px;}
   .cta-band h2{margin-bottom:8px;}
   .cta-band p{color:var(--muted); font-size:17px; margin:0 0 24px;}
+  .invite{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:680px; margin:0 auto;}
+  .invite input{flex:1 1 180px; min-width:160px; padding:12px 14px; font-size:15px; border-radius:var(--radius);
+    border:1px solid var(--border); background:var(--card); color:var(--text);}
+  .invite input::placeholder{color:var(--muted);}
+  .invite input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(14,169,104,0.18);}
 
   footer{border-top:1px solid var(--border); padding:28px 0 48px; font-size:13px; color:var(--muted);
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
@@ -164,7 +169,7 @@
       <a href="#who">Who it's for</a>
       <a href="#formats">Formats</a>
       <a href="#features">Features</a>
-      <a class="btn btn-primary cta-install" data-live="Add to Chrome" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Coming soon</a>
+      <a class="btn btn-primary cta-install" data-live="Add to Chrome" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Get early access</a>
     </div>
   </nav>
 
@@ -175,9 +180,9 @@
     <p class="tagline">The universal watch-list scanner — with AI that reads the document for you.</p>
     <p class="lede">txtradar highlights your watch-list words — funders, clauses, red flags, names, keywords — across every document you review. Bank statements, contracts, web pages, spreadsheets, even photos. Nothing slips through.</p>
     <div class="cta-row">
-      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#get">Coming soon</a>
+      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#get">Request early access</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
-      <span class="cta-note soon-note">Coming soon to the Chrome Web Store.</span>
+      <span class="cta-note soon-note">Now in the Chrome Web Store — invite-only beta.</span>
     </div>
     <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
       <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
@@ -307,12 +312,18 @@
   <section id="get">
     <div class="cta-band">
       <h2>Put every document on your radar</h2>
-      <p>Free to install. For anyone who reads for a living.</p>
-      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#" style="font-size:16px; padding:13px 24px;">Coming soon</a>
+      <p>txtradar is live in the Chrome Web Store as an <b>invite-only beta</b>. Request access and we'll email you your invite link.</p>
+      <form id="inviteForm" class="invite" autocomplete="on">
+        <input type="text" id="invName" placeholder="Full name" required maxlength="80" />
+        <input type="email" id="invEmail" placeholder="Email" required maxlength="120" />
+        <input type="text" id="invNote" placeholder="What do you review? (optional)" maxlength="160" />
+        <button type="submit" class="btn btn-primary" style="font-size:15px;">Request early access</button>
+        <p id="invMsg" class="cta-note" style="display:none; width:100%;"></p>
+      </form>
+      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#" style="display:none; font-size:16px; padding:13px 24px;">Add to Chrome</a>
       <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
         <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
       </a>
-      <p class="soon-note" style="margin-top:16px;">Coming soon to the Chrome Web Store — check back shortly.</p>
     </div>
   </section>
 
@@ -343,7 +354,45 @@
       b.href = STORE_URL;
       b.style.display = "inline-block";
     });
+    document.querySelectorAll(".cta-install").forEach(function (a) { a.style.display = "inline-flex"; });
+    var f = document.getElementById("inviteForm");
+    if (f) f.style.display = "none";   // public launch: direct install replaces the invite form
   }
+
+  // ---- invite-only beta: early-access request form → Supabase waitlist ----
+  (function () {
+    var SB_URL = "https://jjivmbwdbfwigrlugbra.supabase.co";
+    var SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqaXZtYndkYmZ3aWdybHVnYnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3OTk2MjcsImV4cCI6MjA5NzM3NTYyN30.-tqOb86BhHJ2TdXlaNsLPI8axthkhmOsEOiJcrz38FY";
+    var form = document.getElementById("inviteForm");
+    if (!form) return;
+    var msg = document.getElementById("invMsg");
+    function say(t) { msg.textContent = t; msg.style.display = "block"; }
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      var name = document.getElementById("invName").value.trim();
+      var email = document.getElementById("invEmail").value.trim().toLowerCase();
+      var note = document.getElementById("invNote").value.trim();
+      if (!name || !email) return;
+      say("Sending…");
+      try {
+        var r = await fetch(SB_URL + "/rest/v1/waitlist", {
+          method: "POST",
+          headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+          body: JSON.stringify({ full_name: name, email: email, note: note || null })
+        });
+        if (r.ok) {
+          form.querySelectorAll("input,button").forEach(function (el) { el.style.display = "none"; });
+          say("🛰 You're on the list, " + name.split(" ")[0] + " — your invite will land in your inbox shortly.");
+        } else if (r.status === 409) {
+          say("You're already on the list — your invite is on its way.");
+        } else {
+          say("Hmm, that didn't go through — email us at adam@adammadar.com and we'll set you up.");
+        }
+      } catch (err) {
+        say("Hmm, that didn't go through — email us at adam@adammadar.com and we'll set you up.");
+      }
+    });
+  })();
 </script>
 <script src="assets/radar.js"></script>
 <script>
