@@ -77,6 +77,11 @@
   .tagline{font-size:18px; font-weight:500; color:var(--accent-text); margin:0 0 12px;}
   .lede{font-size:19px; color:var(--muted); max-width:620px; margin:0 0 30px;}
   .trust{margin-top:16px; font-size:13px; color:var(--muted); display:flex; align-items:center; gap:7px;}
+  /* official Chrome Web Store badge — hidden until STORE_URL is set (badge rules:
+     it may only appear while the listing is live, and must link to it) */
+  .store-badge{display:none; margin-top:18px;}
+  .store-badge img{height:56px; display:block;}
+  .cta-band .store-badge{margin:18px auto 0; width:fit-content;}
   .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
   .cta-note{font-size:13px; color:var(--muted);}
 
@@ -174,6 +179,9 @@
       <a class="btn btn-ghost" href="#how">See how it works</a>
       <span class="cta-note soon-note">Coming soon to the Chrome Web Store.</span>
     </div>
+    <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
+      <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
+    </a>
     <div class="trust">🔒 Private by design — highlighting happens locally in your browser. Your documents never leave your device.</div>
     <div class="pills">
       <span class="label">one tool reads them all</span>
@@ -301,6 +309,9 @@
       <h2>Put every document on your radar</h2>
       <p>Free to install. For anyone who reads for a living.</p>
       <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#" style="font-size:16px; padding:13px 24px;">Coming soon</a>
+      <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
+        <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
+      </a>
       <p class="soon-note" style="margin-top:16px;">Coming soon to the Chrome Web Store — check back shortly.</p>
     </div>
   </section>
@@ -327,6 +338,11 @@
       a.rel = "noopener";
     });
     document.querySelectorAll(".soon-note").forEach(function (n) { n.style.display = "none"; });
+    // official Chrome Web Store badge — only shown (and always linked) once the listing is live
+    document.querySelectorAll(".store-badge").forEach(function (b) {
+      b.href = STORE_URL;
+      b.style.display = "inline-block";
+    });
   }
 </script>
 <script src="assets/radar.js"></script>
