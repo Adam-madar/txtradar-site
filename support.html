@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>txtradar — Support</title>
+<meta name="description" content="Help, troubleshooting and contact for the txtradar Chrome extension." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://txtradar.com/support" />
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{ --bg:#ffffff; --text:#161719; --muted:#5f636b; --border:#e6e8eb; --accent:#0ea968; --card:#f6f7f9; }
+  @media (prefers-color-scheme:dark){ :root{ --bg:#0f1012; --text:#e9eaed; --muted:#9297a1; --border:#2a2c31; --accent:#28c987; --card:#161719; } }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.7;}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  a{color:var(--accent);}
+  h1{font-size:34px;letter-spacing:-.02em;margin:0 0 6px;}
+  .updated{color:var(--muted);font-size:14px;margin:0 0 32px;}
+  h2{font-size:20px;letter-spacing:-.01em;margin:36px 0 8px;}
+  h3{font-size:16px;letter-spacing:-.01em;margin:22px 0 4px;}
+  p,li{font-size:16px;color:var(--text);}
+  li{margin:4px 0;}
+  .muted{color:var(--muted);}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:16px 0;}
+  .back{display:inline-block;margin-bottom:24px;font-size:14px;color:var(--muted);text-decoration:none;}
+  dl.faq{margin:0;}
+  dl.faq dt{font-weight:600;margin:20px 0 2px;}
+  dl.faq dd{margin:0;color:var(--text);}
+  code{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">← txtradar.com</a>
+  <h1>Support</h1>
+  <p class="updated">For txtradar 1.35 · last updated August 2026</p>
+
+  <p>txtradar is a Chrome extension for reading documents closely — it highlights the words on your watch lists across PDFs, Word and Excel files, and web pages, and gives you tools for working through bank statements line by line.</p>
+
+  <div class="card">
+    <p style="margin:0"><strong>Need a hand?</strong> Email <a href="mailto:team@team-amm.com">team@team-amm.com</a>. Please include your txtradar version (Settings → About &amp; help), your browser version, and what you were doing when it went wrong. A screenshot helps more than anything else.</p>
+  </div>
+
+  <h2>What txtradar does — and what it does not</h2>
+  <p>txtradar reports <strong>numbers and matches</strong>. It counts, totals, finds and highlights. It tells you what a statement says.</p>
+  <p><strong>It never scores, rates or decides a deal.</strong> There is no approve/decline, no risk score, no recommendation anywhere in the product. Every figure it shows you comes from the document you gave it, and the judgement stays with you.</p>
+
+  <h2>The main tools</h2>
+  <ul>
+    <li><strong>Watch lists</strong> — your own words and categories, with alternate spellings ("aka"), highlighted everywhere they appear.</li>
+    <li><strong>ClickRadar</strong> — hover the document to read it. In <em>Tally</em> mode, click amounts to add them up or words to count them. In <em>Explain</em> mode, click a transaction row to break it down.</li>
+    <li><strong>Night Vision</strong> — puts the page under goggles and cuts out only the records that matter, chosen by your watch list, bounced-item wording, funder names, or an amount threshold you set.</li>
+    <li><strong>Signals</strong> — repeating debits, negative days, deposit concentration and round-trip transfers, found in the numbers.</li>
+    <li><strong>Packet</strong> — an evidence packet of just the flagged pages, ready to print or save as PDF.</li>
+    <li><strong>Bulk Scan</strong> — several statements at once, side by side.</li>
+    <li><strong>Reports</strong> — findings and triage results exported to Excel.</li>
+  </ul>
+
+  <h2>About the AI features</h2>
+  <p>There are two, and they work differently. This is the most common source of confusion, so it is worth reading.</p>
+
+  <h3>AI triage</h3>
+  <p>Summarises a statement and lists what it thinks is worth a second look. This <strong>requires a txtradar account</strong> — you sign in and it runs on our service. When a statement is too long to send in full, txtradar prioritises the pages with watch-list matches and tells you plainly how many pages it actually read. A partial read is never presented as a verdict on the whole document.</p>
+
+  <h3>ClickRadar Explain</h3>
+  <p>Explains a single transaction row. This uses <strong>your own Anthropic API key</strong>, which you add under Settings. Without a key it still works, just offline-only: it will read the date, amount, direction and account details straight off the line, and identify anything on your watch lists or the built-in funder list. The key only adds recognition of merchants nobody has listed yet.</p>
+
+  <div class="card">
+    <p style="margin:0"><strong>What is sent, and what is not.</strong> Dates, amounts and account numbers are always parsed on your own machine and never sent to a model. ClickRadar Explain sends only the descriptor text — the merchant part of the line — and never the figures. On a document you are underwriting, a made-up number is far worse than a missing one, so the product is built to never produce one.</p>
+  </div>
+
+  <h2>Common questions</h2>
+  <dl class="faq">
+    <dt>The AI features are not doing anything.</dt>
+    <dd>AI triage needs you to be signed in. ClickRadar Explain needs your own Anthropic API key under Settings. Everything else in txtradar works without either.</dd>
+
+    <dt>Nothing is highlighted in my PDF.</dt>
+    <dd>The PDF is probably a scan — an image with no selectable text. Press <strong>OCR SCAN</strong> in the toolbar to read the text off the page first, then it will highlight normally.</dd>
+
+    <dt>Night Vision is hiding the dates and amounts.</dt>
+    <dd>Set <em>Cut out</em> to <strong>The whole record</strong> in Settings → Appearance. That reveals the entire transaction rather than just the matched word.</dd>
+
+    <dt>ClickRadar is explaining the wrong row.</dt>
+    <dd>Hover first — the record it will read is outlined on the page before you click. If the outline covers the wrong lines, the statement's layout is unusual and we would like to see it. Send us a screenshot.</dd>
+
+    <dt>The glass sliders in Settings do nothing.</dt>
+    <dd>They only apply to the Glass and AMM themes. On any other theme they are hidden, because a control that cannot do anything is worse than no control.</dd>
+
+    <dt>Can I use txtradar without an account?</dt>
+    <dd>Yes. Watch lists, highlighting, ClickRadar, Night Vision, Signals, Packet, Bulk Scan and the Excel exports all work signed out. An account adds syncing across machines, shared lists, and AI triage.</dd>
+
+    <dt>Where is my data kept?</dt>
+    <dd>Your watch lists and notes are stored in your browser, and in your account if you create one. Documents you open are processed on your own machine. See the <a href="/privacy">privacy policy</a> for the full picture.</dd>
+
+    <dt>How do I delete my account?</dt>
+    <dd>Email <a href="mailto:team@team-amm.com">team@team-amm.com</a> and we will remove your account and its data.</dd>
+  </dl>
+
+  <h2>Reporting a bug</h2>
+  <p>The most useful reports include:</p>
+  <ul>
+    <li>Your txtradar version — Settings → About &amp; help.</li>
+    <li>Your Chrome version — <code>chrome://version</code>.</li>
+    <li>What you expected, and what happened instead.</li>
+    <li>A screenshot. If it involves a statement, please black out the account details first.</li>
+  </ul>
+  <p class="muted">Please do not email us bank statements containing real customer data. A screenshot with the sensitive parts removed is enough for us to work from.</p>
+
+  <h2>Contact</h2>
+  <p>Support and bug reports: <a href="mailto:team@team-amm.com">team@team-amm.com</a><br />
+  Privacy and data requests: <a href="mailto:adam@adammadar.com">adam@adammadar.com</a></p>
+  <p class="muted">txtradar is made by AMM. We aim to reply within two business days.</p>
+</div>
+</body>
+</html>
