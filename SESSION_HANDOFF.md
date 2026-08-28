@@ -1,4 +1,4 @@
-State as of: 7d5831a  ·  Branch: main  ·  Written: 2026-08-28
+State as of: 4388632  ·  Branch: main  ·  Written: 2026-08-28
 This session: APPLE_REDESIGN  ·  Archive copy: docs/handoffs/HANDOFF_2026-08-28_APPLE_REDESIGN.md
 Previous handoff: none — first handoff in this repo
 
@@ -22,7 +22,7 @@ Previous handoff: none — first handoff in this repo
 - **Never commit:** anything with borrower/client data, API keys beyond the already-public Supabase anon key that ships in index.html by design.
 
 ## Not done / unverified
-- [ ] Waitlist form submit not live-tested after redesign (code is verbatim from the old page; a real submission reaching the Supabase `waitlist` table would prove it end-to-end)
+- [x] Waitlist form live-tested 2026-08-28: submit on production succeeded and a duplicate resubmit returned the 409 "already on the list" path — row confirmed in Supabase `waitlist`. A TEST ROW remains there (`Form Test (Claude)` / adam+formtest@adammadar.com, note "end-to-end form test — ignore") — delete at will; it will appear in the 2026-08-29 waitlist digest email.
 - [ ] support.html / privacy.html / confirmed.html still have the OLD design — they work, they just don't match index.html yet
 - [ ] Testimonials section still hidden (`#loved`, display:none) awaiting real quotes — carried over from before
 
@@ -34,4 +34,4 @@ Previous handoff: none — first handoff in this repo
 - Reference mockup this shipped from: https://claude.ai/code/artifact/7c7c20c0-487f-401e-aded-f60af9c5998a (private artifact on Adam's account)
 
 ## Next action
-Live-test the waitlist form once (real name/email → row lands in Supabase `waitlist`), then decide whether to port the Apple treatment to support/privacy/confirmed pages.
+Decide whether to port the Apple treatment to the support/privacy/confirmed pages (they still have the old design); delete the waitlist test row when convenient.
