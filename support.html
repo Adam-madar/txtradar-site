@@ -8,34 +8,113 @@
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://txtradar.com/support" />
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
-  :root{ --bg:#ffffff; --text:#161719; --muted:#5f636b; --border:#e6e8eb; --accent:#0ea968; --card:#f6f7f9; }
-  @media (prefers-color-scheme:dark){ :root{ --bg:#0f1012; --text:#e9eaed; --muted:#9297a1; --border:#2a2c31; --accent:#28c987; --card:#161719; } }
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.7;}
-  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
-  a{color:var(--accent);}
-  h1{font-size:34px;letter-spacing:-.02em;margin:0 0 6px;}
-  .updated{color:var(--muted);font-size:14px;margin:0 0 32px;}
-  h2{font-size:20px;letter-spacing:-.01em;margin:36px 0 8px;}
-  h3{font-size:16px;letter-spacing:-.01em;margin:22px 0 4px;}
-  p,li{font-size:16px;color:var(--text);}
-  li{margin:4px 0;}
-  .muted{color:var(--muted);}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:16px 0;}
-  .back{display:inline-block;margin-bottom:24px;font-size:14px;color:var(--muted);text-decoration:none;}
-  dl.faq{margin:0;}
-  dl.faq dt{font-weight:600;margin:20px 0 2px;}
-  dl.faq dd{margin:0;color:var(--text);}
-  code{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-size:14px;}
+  :root{
+    --bg:#FBFBFD; --bg-elev:#FFFFFF; --card:#FFFFFF;
+    --text:#1D1D1F; --muted:#5D6570; --faint:#8A9099;
+    --line:rgba(0,0,0,.08);
+    --accent:#0EA968; --accent-ink:#FFFFFF; --accent-soft:rgba(14,169,104,.12);
+    --glass:rgba(251,251,253,.62); --glass-brd:rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0B0C0F; --bg-elev:#131419; --card:#15161B;
+      --text:#F5F6F8; --muted:#9BA1AB; --faint:#6B7178;
+      --line:rgba(255,255,255,.09);
+      --accent:#32D28E; --accent-ink:#062A1B; --accent-soft:rgba(50,210,142,.14);
+      --glass:rgba(15,16,20,.58); --glass-brd:rgba(255,255,255,.08);
+    }
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-padding-top:84px}
+  body{
+    background:var(--bg); color:var(--text);
+    font:400 17px/1.65 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:40;
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    backdrop-filter:blur(20px) saturate(180%);
+  }
+  nav::after{
+    content:"";position:absolute;inset:100% 0 auto 0;height:20px;pointer-events:none;
+    background:linear-gradient(var(--bg), transparent);opacity:.7;
+  }
+  .nav-in{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:26px;height:60px}
+  .logo{font-weight:700;letter-spacing:-.02em;font-size:18px;display:flex;align-items:center;gap:9px;color:var(--text)}
+  .logo:hover{text-decoration:none}
+  .nav-links{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:14.5px;color:var(--muted)}
+  .nav-links a{color:inherit;transition:color .15s}
+  .nav-links a:hover{color:var(--text);text-decoration:none}
+  .nav-cta{
+    display:inline-flex;padding:9px 16px;border-radius:980px;font-size:14.5px;font-weight:600;
+    background:var(--accent);color:var(--accent-ink);letter-spacing:-.005em;
+    transition:transform .28s cubic-bezier(.25,1,.4,1);
+  }
+  .nav-cta:active{transform:scale(.96);transition:transform .08s ease-out}
+  .nav-cta:hover{text-decoration:none;filter:brightness(1.06)}
+  @media (max-width:760px){ .nav-links a:not(.nav-cta){display:none} }
+  @media (prefers-reduced-transparency: reduce){
+    nav{background:var(--bg-elev);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:1px solid var(--line)}
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:126px 24px 80px}
+  .eyebrow{
+    display:block;font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(2.1rem, 5vw, 3rem);line-height:1.05;letter-spacing:-.02em;font-weight:700;
+    margin-bottom:8px;text-wrap:balance;
+  }
+  .updated{color:var(--faint);font-size:14px;margin-bottom:38px}
+  h2{font-size:1.4rem;letter-spacing:-.014em;font-weight:700;margin:46px 0 10px}
+  h3{font-size:1.05rem;letter-spacing:-.008em;font-weight:600;margin:24px 0 6px}
+  p,li{color:var(--text)}
+  p{margin:10px 0}
+  ul{padding-left:22px;margin:10px 0}
+  li{margin:6px 0}
+  .muted{color:var(--muted)}
+  strong{font-weight:600}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 22px;margin:18px 0;
+  }
+  dl.faq{margin:0}
+  dl.faq dt{font-weight:600;margin:22px 0 4px;letter-spacing:-.006em}
+  dl.faq dd{margin:0;color:var(--muted)}
+  code{
+    background:var(--bg-elev);border:1px solid var(--line);border-radius:6px;padding:1px 6px;
+    font:14px ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0 10px;color:var(--faint);font-size:14px;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer a{color:inherit}
+  footer a:hover{color:var(--text)}
 </style>
 </head>
 <body>
+<nav aria-label="Main">
+  <div class="nav-in">
+    <a class="logo" href="/"><span id="navRadar" style="flex:none;"></span>txtradar</a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/#who">Who it's for</a>
+      <a href="/#formats">Formats</a>
+      <a href="/#features">Features</a>
+      <a class="nav-cta" href="/#get">Get early access</a>
+    </div>
+  </div>
+</nav>
+
 <div class="wrap">
-  <a class="back" href="/">← txtradar.com</a>
+  <span class="eyebrow">Support</span>
   <h1>Support</h1>
   <p class="updated">For txtradar 1.35 · last updated August 2026</p>
 
@@ -114,6 +193,17 @@
   <p>Support and bug reports: <a href="mailto:team@team-amm.com">team@team-amm.com</a><br />
   Privacy and data requests: <a href="mailto:adam@adammadar.com">adam@adammadar.com</a></p>
   <p class="muted">txtradar is made by AMM. We aim to reply within two business days.</p>
+
+  <footer>
+    <div>© <span id="yr"></span> txtradar · <a href="/support">Support</a> · <a href="/privacy">Privacy</a></div>
+    <div>Scan anything. Miss nothing.</div>
+  </footer>
 </div>
+
+<script src="assets/radar.js"></script>
+<script>
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  if (window.Radar) Radar.mount(document.getElementById("navRadar"), { size: 30 });
+</script>
 </body>
 </html>
