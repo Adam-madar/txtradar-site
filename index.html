@@ -42,305 +42,555 @@
 }
 </script>
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
+  /* ============ tokens — light default, dark via system (as before) ============ */
   :root{
-    --bg:#ffffff; --surface:#f6f7f9; --card:#ffffff; --text:#161719; --muted:#5f636b;
-    --border:#e6e8eb; --accent:#0ea968; --accent-soft:#e4f7ee; --accent-text:#0a7a4d;
-    --radius:12px; --maxw:1060px;
+    --bg:#FBFBFD; --bg-elev:#FFFFFF; --card:#FFFFFF;
+    --text:#1D1D1F; --muted:#5D6570; --faint:#8A9099;
+    --line:rgba(0,0,0,.08);
+    --accent:#0EA968; --accent-ink:#FFFFFF; --accent-soft:rgba(14,169,104,.12);
+    --amber:#B26A00; --amber-soft:rgba(255,180,84,.22);
+    --red:#C7392F;   --red-soft:rgba(255,122,112,.18);
+    --violet:#6D4FD1;--violet-soft:rgba(167,139,250,.2);
+    --glass:rgba(251,251,253,.62); --glass-brd:rgba(0,0,0,.06);
+    --scrim:rgba(20,22,26,.4);
+    --shadow:0 24px 70px rgba(20,30,40,.18);
   }
   @media (prefers-color-scheme:dark){
-    :root{ --bg:#0f1012; --surface:#161719; --card:#17181b; --text:#e9eaed; --muted:#9297a1;
-      --border:#2a2c31; --accent:#28c987; --accent-soft:#123023; --accent-text:#8ce9bd; }
+    :root{
+      --bg:#0B0C0F; --bg-elev:#131419; --card:#15161B;
+      --text:#F5F6F8; --muted:#9BA1AB; --faint:#6B7178;
+      --line:rgba(255,255,255,.09);
+      --accent:#32D28E; --accent-ink:#062A1B; --accent-soft:rgba(50,210,142,.14);
+      --amber:#FFB454; --amber-soft:rgba(255,180,84,.16);
+      --red:#FF7A70;   --red-soft:rgba(255,122,112,.15);
+      --violet:#A78BFA;--violet-soft:rgba(167,139,250,.16);
+      --glass:rgba(15,16,20,.58); --glass-brd:rgba(255,255,255,.08);
+      --scrim:rgba(0,0,0,.55);
+      --shadow:0 24px 70px rgba(0,0,0,.55);
+    }
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0; background:var(--bg); color:var(--text);
-    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.6;
-    -webkit-font-smoothing:antialiased;}
-  a{color:inherit;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  .btn{display:inline-flex; align-items:center; gap:7px; border-radius:var(--radius);
-    padding:12px 20px; font-size:15px; font-weight:500; cursor:pointer; text-decoration:none;
-    border:1px solid transparent; transition:background .15s,border-color .15s;}
-  .btn-primary{background:var(--accent); color:#fff;}
-  .btn-primary:hover{filter:brightness(1.05);}
-  .btn-ghost{background:transparent; color:var(--text); border-color:var(--border);}
-  .btn-ghost:hover{background:var(--surface);}
 
-  nav{display:flex; align-items:center; justify-content:space-between; padding:20px 0;}
-  .brand{display:flex; align-items:center; gap:10px; font-size:19px; font-weight:600; letter-spacing:-.01em;}
-  .logo{width:30px; height:30px; border-radius:9px; background:var(--accent); display:flex; align-items:center; justify-content:center;}
-  .navlinks{display:flex; align-items:center; gap:22px; font-size:14px; color:var(--muted);}
-  .navlinks a{text-decoration:none;}
-  .navlinks a:hover{color:var(--text);}
+  /* ============ base ============ */
+  *{box-sizing:border-box;margin:0}
+  html{scroll-padding-top:84px}
+  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
+  body{
+    background:var(--bg); color:var(--text);
+    font:400 17px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-optical-sizing:auto;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  h1,h2{text-wrap:balance}
+  h1{
+    font-size:clamp(2.7rem, 7.2vw, 5.1rem);
+    line-height:1.03; letter-spacing:-.022em; font-weight:700;
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, "Segoe UI", Roboto, sans-serif;
+  }
+  h2{
+    font-size:clamp(1.75rem, 3.8vw, 2.6rem);
+    line-height:1.08; letter-spacing:-.018em; font-weight:700;
+  }
+  h3{font-size:1.06rem;letter-spacing:-.008em;font-weight:600;line-height:1.3}
+  .sub{color:var(--muted);max-width:38em}
+  .sub b{color:var(--text);font-weight:600}
+  .sub a{color:var(--accent)}
+  section{padding:104px 0}
+  .sec-head{display:flex;flex-direction:column;gap:14px;max-width:640px;margin-bottom:52px}
 
-  .hero{padding:64px 0 40px;}
-  .eyebrow{display:inline-block; font-size:13px; font-weight:500; color:var(--accent-text);
-    background:var(--accent-soft); padding:5px 12px; border-radius:20px; margin-bottom:22px;}
-  h1{font-size:56px; line-height:1.08; letter-spacing:-.03em; font-weight:600; margin:0 0 18px;}
-  .tagline{font-size:18px; font-weight:500; color:var(--accent-text); margin:0 0 12px;}
-  .lede{font-size:19px; color:var(--muted); max-width:620px; margin:0 0 30px;}
-  .trust{margin-top:16px; font-size:13px; color:var(--muted); display:flex; align-items:center; gap:7px;}
+  /* ============ buttons — feedback on the press, instant ============ */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:980px;cursor:pointer;
+    font:600 16px/1 inherit;font-family:inherit;letter-spacing:-.005em;
+    color:var(--text);background:var(--bg-elev);
+    border:1px solid var(--line);
+    transition:transform .28s cubic-bezier(.25,1,.4,1), background .2s, border-color .2s;
+    touch-action:manipulation;
+  }
+  .btn:active{transform:scale(.96);transition:transform .08s ease-out}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+  .btn.primary:hover{filter:brightness(1.06)}
+  .btn.quiet:hover{border-color:var(--accent)}
+
+  /* ============ nav — translucent chrome, content scrolls under ============ */
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:40;
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    backdrop-filter:blur(20px) saturate(180%);
+  }
+  nav::after{ /* scroll edge effect — a fade, not a 1px divider */
+    content:"";position:absolute;inset:100% 0 auto 0;height:20px;pointer-events:none;
+    background:linear-gradient(var(--bg), transparent);
+    opacity:0;transition:opacity .3s;
+  }
+  nav.scrolled::after{opacity:.7}
+  .nav-in{display:flex;align-items:center;gap:26px;height:60px}
+  .logo{font-weight:700;letter-spacing:-.02em;font-size:18px;display:flex;align-items:center;gap:9px}
+  .nav-links{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:14.5px;color:var(--muted)}
+  .nav-links a{transition:color .15s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{margin-left:6px;padding:9px 16px;font-size:14.5px}
+  @media (max-width:760px){ .nav-links{display:none} .nav-cta{display:inline-flex;margin-left:auto} }
+  @media (prefers-reduced-transparency: reduce){
+    nav{background:var(--bg-elev);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:1px solid var(--line)}
+  }
+  @media (max-width:760px){
+    nav .nav-links{display:none}
+  }
+  .nav-cta-solo{display:none}
+  @media (max-width:760px){ .nav-cta-solo{display:inline-flex;margin-left:auto;padding:9px 16px;font-size:14.5px} }
+
+  /* ============ hero ============ */
+  .hero{padding:150px 0 96px;text-align:center}
+  .hero-radar{display:inline-block;margin-bottom:30px}
+  .hero .eyebrow{display:block;margin-bottom:18px}
+  .hero .tagline{margin:22px auto 0;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.45;color:var(--muted);max-width:38em}
+  .hero .tagline b{color:var(--text);font-weight:600}
+  .hero .lede{margin:14px auto 0;color:var(--muted);max-width:40em;font-size:1.02rem}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+  .hero-notes{margin-top:26px;display:flex;flex-direction:column;gap:8px;align-items:center;font-size:14px;color:var(--faint)}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--accent-soft);color:var(--accent);
+    border-radius:980px;padding:6px 14px;font-weight:600;font-size:13.5px;
+  }
   /* official Chrome Web Store badge — hidden until STORE_URL is set (badge rules:
      it may only appear while the listing is live, and must link to it) */
-  .store-badge{display:none; margin-top:18px;}
-  .store-badge img{height:56px; display:block;}
-  .cta-band .store-badge{margin:18px auto 0; width:fit-content;}
-  .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
-  .cta-note{font-size:13px; color:var(--muted);}
+  .store-badge{display:none;margin:18px auto 0;width:fit-content}
+  .store-badge img{height:56px;display:block}
+  .fmt-strip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:56px}
+  .fmt-strip .label{width:100%;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+  .chip{
+    padding:8px 16px;border-radius:980px;border:1px solid var(--line);
+    background:var(--bg-elev);font-size:14.5px;font-weight:500;color:var(--muted);
+    transition:transform .28s cubic-bezier(.25,1,.4,1), border-color .2s, color .2s;
+  }
+  .chip:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--text)}
 
-  .pills{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-top:44px; padding-top:28px; border-top:1px solid var(--border);}
-  .pills .label{font-size:13px; color:var(--muted); margin-right:4px;}
-  .pill{font-size:13px; font-weight:500; color:var(--muted); background:var(--surface);
-    border:1px solid var(--border); border-radius:20px; padding:5px 13px;}
+  /* staged reveal (JS-gated so no-JS still shows everything) */
+  .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.25,1,.4,1), transform .7s cubic-bezier(.25,1,.4,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .js .reveal{transform:none;transition:opacity .35s ease}
+  }
 
-  section.block{padding:56px 0;}
-  h2{font-size:32px; letter-spacing:-.02em; font-weight:600; margin:0 0 10px;}
-  .sub{font-size:17px; color:var(--muted); max-width:640px; margin:0 0 36px;}
+  /* ============ demo — statement scan ============ */
+  .demo-frame{position:relative;max-width:760px;margin:0 auto}
+  .statement{
+    background:var(--card);border:1px solid var(--line);border-radius:20px;
+    box-shadow:var(--shadow);
+    padding:26px 26px 22px;
+    font:14px/2.1 ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-numeric:tabular-nums;
+    overflow-x:auto;
+  }
+  .statement .st-head{
+    font-family:inherit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--faint);margin-bottom:12px;display:flex;justify-content:space-between;gap:12px;
+  }
+  .st-row{display:flex;gap:14px;white-space:nowrap}
+  .st-row .date{color:var(--faint);width:5ch;flex:none}
+  .st-row .desc{flex:1;min-width:0}
+  .st-row .amt{color:var(--muted)}
+  .st-row .amt.neg{color:var(--red)}
+  .st-row .amt.pos{color:var(--accent)}
+  .mark{border-radius:5px;padding:1px 5px;margin:0 -2px;position:relative;color:var(--text)}
+  .mark{background:linear-gradient(var(--mk,var(--accent-soft)),var(--mk,var(--accent-soft))) no-repeat left/0% 100%}
+  .js .demo-frame.live .mark{animation:sweep .5s cubic-bezier(.25,1,.4,1) forwards;animation-delay:calc(.25s + var(--i)*.32s)}
+  .no-js .mark, .demo-frame:not(.live) .mark{background-size:100% 100%}
+  @keyframes sweep{to{background-size:100% 100%}}
+  @media (prefers-reduced-motion: reduce){
+    .js .demo-frame.live .mark{animation:none;background-size:100% 100%}
+  }
+  .mark.funder{--mk:var(--accent-soft)}
+  .mark.odnsf{--mk:var(--amber-soft)}
+  .mark.chbk{--mk:var(--red-soft)}
+  .mark.ret{--mk:var(--violet-soft)}
 
-  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;}
-  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px;}
-  .card .ico{width:38px; height:38px; border-radius:10px; background:var(--accent-soft); color:var(--accent-text);
-    display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
-  .card h3{font-size:17px; font-weight:600; margin:0 0 6px;}
-  .card p{font-size:14px; color:var(--muted); margin:0;}
+  /* radar tally — floating glass panel */
+  .radar-panel{
+    position:absolute;right:-14px;top:-26px;
+    background:var(--glass);border:1px solid var(--glass-brd);border-radius:16px;
+    -webkit-backdrop-filter:blur(18px) saturate(170%);
+    backdrop-filter:blur(18px) saturate(170%);
+    box-shadow:0 14px 40px rgba(0,0,0,.3);
+    padding:14px 16px;min-width:210px;
+    font-size:13.5px;
+  }
+  @media (prefers-reduced-transparency: reduce){
+    .radar-panel{background:var(--bg-elev);-webkit-backdrop-filter:none;backdrop-filter:none}
+  }
+  @media (max-width:860px){ .radar-panel{position:static;margin:14px auto 0;max-width:320px} }
+  .radar-panel .r-title{display:flex;align-items:center;gap:7px;font-weight:600;margin-bottom:10px;letter-spacing:-.005em}
+  .radar-panel .r-title .ping{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  @media (prefers-reduced-motion: no-preference){
+    .radar-panel .r-title .ping{animation:tally-ping 2.4s ease-out infinite}
+  }
+  @keyframes tally-ping{0%{box-shadow:0 0 0 0 var(--accent-soft)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  .r-row{display:flex;justify-content:space-between;gap:16px;padding:4px 0;color:var(--muted)}
+  .r-row .r-n{font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+  .r-row .r-k{display:flex;align-items:center;gap:7px}
+  .r-dot{width:7px;height:7px;border-radius:50%;flex:none}
+  .demo-cap{color:var(--faint);font-size:14px;text-align:center;margin-top:64px}
 
-  .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;}
-  .step .n{font-size:13px; font-weight:600; color:var(--accent-text); background:var(--accent-soft);
-    width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
-  .step h3{font-size:16px; font-weight:600; margin:0 0 5px;}
-  .step p{font-size:14px; color:var(--muted); margin:0;}
+  /* ============ cards / grids ============ */
+  .grid{display:grid;gap:16px}
+  .feat{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:760px){ .feat{grid-template-columns:1fr} }
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:26px;display:flex;flex-direction:column;gap:8px;
+    transition:transform .32s cubic-bezier(.25,1,.4,1), border-color .25s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--glass-brd)}
+  @media (prefers-reduced-motion: reduce){ .card:hover, .chip:hover{transform:none} }
+  .card .ic{
+    width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+    background:var(--accent-soft);color:var(--accent);margin-bottom:8px;
+  }
+  .card p{color:var(--muted);font-size:15.5px}
+  .card code{font-size:.9em}
 
-  .cta-band{background:var(--surface); border:1px solid var(--border); border-radius:20px;
-    padding:44px; text-align:center; margin:20px 0 60px;}
-  .cta-band h2{margin-bottom:8px;}
-  .cta-band p{color:var(--muted); font-size:17px; margin:0 0 24px;}
-  .invite{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:680px; margin:0 auto;}
-  .invite input{flex:1 1 180px; min-width:160px; padding:12px 14px; font-size:15px; border-radius:var(--radius);
-    border:1px solid var(--border); background:var(--card); color:var(--text);}
-  .invite input::placeholder{color:var(--muted);}
-  .invite input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(14,169,104,0.18);}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:760px){ .steps{grid-template-columns:1fr} }
+  .step .n{
+    font:700 15px/1 inherit;color:var(--accent);
+    width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    background:var(--accent-soft);margin-bottom:12px;font-variant-numeric:tabular-nums;
+  }
 
-  footer{border-top:1px solid var(--border); padding:28px 0 48px; font-size:13px; color:var(--muted);
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  /* ============ formats — segmented control w/ spring indicator ============ */
+  .seg{
+    position:relative;display:flex;gap:2px;padding:4px;border-radius:14px;
+    background:var(--bg-elev);border:1px solid var(--line);
+    width:max-content;max-width:100%;margin-bottom:30px;overflow-x:auto;
+  }
+  .seg-ind{
+    position:absolute;top:4px;bottom:4px;left:0;width:80px;border-radius:10px;
+    background:var(--accent-soft);border:1px solid var(--accent);
+    pointer-events:none;
+  }
+  .seg button{
+    position:relative;z-index:1;border:0;background:none;cursor:pointer;
+    padding:9px 18px;border-radius:10px;font:600 14.5px/1 inherit;font-family:inherit;
+    color:var(--muted);transition:color .18s, transform .2s;
+    white-space:nowrap;touch-action:manipulation;
+  }
+  .seg button:active{transform:scale(.96)}
+  .seg button[aria-selected="true"]{color:var(--accent)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .pane{color:var(--muted);max-width:44em;font-size:16.5px;min-height:3.2em}
+  .pane b{color:var(--text);font-weight:600}
+  .js .pane{transition:opacity .22s ease}
 
-  /* demo preview */
-  .demo{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
-  .demo .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
-  .demo .dot3{width:10px;height:10px;border-radius:50%;background:var(--border);}
-  .demo .url{margin-left:8px;font-size:12px;color:var(--muted);}
-  .demo .body{display:flex;}
-  .demo .doc{flex:1;padding:20px 22px;font-size:13.5px;line-height:2;min-width:0;}
-  .demo .doc .row{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .demo mark{border-radius:4px;padding:0 3px;background:rgba(14,169,104,0.18);border:1px solid rgba(14,169,104,0.6);color:inherit;}
-  .demo mark.b{background:rgba(129,140,248,0.18);border-color:rgba(129,140,248,0.7);}
-  .demo mark.r{background:rgba(226,75,74,0.16);border-color:rgba(226,75,74,0.6);}
-  .demo .panel{flex:none;width:212px;border-left:1px solid var(--border);padding:14px;background:var(--surface);}
-  .demo .panel .ph{display:flex;align-items:center;justify-content:space-between;font-weight:500;font-size:13px;margin-bottom:10px;}
-  .demo .panel .pr{display:flex;align-items:center;gap:8px;font-size:13px;padding:5px 0;color:var(--muted);}
-  .demo .panel .sw{width:10px;height:10px;border-radius:3px;flex:none;}
-  /* faq */
-  .faq{max-width:760px;}
-  .faq details{border-top:1px solid var(--border);padding:14px 2px;}
-  .faq details:last-child{border-bottom:1px solid var(--border);}
-  .faq summary{cursor:pointer;font-weight:500;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
-  .faq summary::-webkit-details-marker{display:none;}
-  .faq summary::after{content:"+";color:var(--muted);font-size:20px;flex:none;}
-  .faq details[open] summary::after{content:"\2013";}
-  .faq p{color:var(--muted);font-size:15px;margin:10px 0 2px;}
-  /* testimonials */
-  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
-  .quote{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;}
-  .quote .stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px;}
-  .quote p{font-size:15px;margin:0 0 14px;}
-  .quote .who{font-size:13px;color:var(--muted);}
-  @media (max-width:640px){
-    h1{font-size:40px;} .hero{padding:40px 0 28px;} .navlinks{display:none;}
-    .cta-band{padding:32px 20px;} .demo .panel{display:none;}
+  .who{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:760px){ .who{grid-template-columns:1fr} }
+
+  /* testimonials (hidden until real quotes exist) */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .quote .stars{color:var(--accent);letter-spacing:2px;margin-bottom:4px}
+  .quote .who-line{font-size:13px;color:var(--faint)}
+
+  /* ============ faq ============ */
+  .faq{max-width:760px}
+  .faq details{border-bottom:1px solid var(--line);padding:4px 0}
+  .faq summary{
+    cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:16px 2px;font-weight:600;letter-spacing:-.008em;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .pl{
+    flex:none;width:22px;height:22px;position:relative;color:var(--faint);
+    transition:transform .3s cubic-bezier(.25,1,.4,1);
+  }
+  .faq summary .pl::before, .faq summary .pl::after{
+    content:"";position:absolute;inset:0;margin:auto;background:currentColor;border-radius:2px;
+  }
+  .faq summary .pl::before{width:13px;height:1.6px}
+  .faq summary .pl::after{width:1.6px;height:13px;transition:transform .3s cubic-bezier(.25,1,.4,1)}
+  .faq details[open] summary .pl{transform:rotate(90deg)}
+  .faq details[open] summary .pl::after{transform:scaleY(0)}
+  .faq details .a{color:var(--muted);padding:0 34px 18px 2px;max-width:44em;font-size:16px}
+  .faq details .a a{color:var(--accent)}
+  @media (prefers-reduced-motion: reduce){ .faq summary .pl, .faq summary .pl::after{transition:none} }
+
+  /* ============ final cta / invite form ============ */
+  .final{text-align:center;padding:130px 0 120px}
+  .final .sub{margin:18px auto 0}
+  .invite{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:680px;margin:32px auto 0}
+  .invite input{
+    flex:1 1 180px;min-width:160px;padding:12px 16px;font-size:15px;border-radius:12px;
+    border:1px solid var(--line);background:var(--bg-elev);color:var(--text);
+    font-family:inherit;
+  }
+  .invite input::placeholder{color:var(--faint)}
+  .invite input:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+  .cta-note{font-size:13px;color:var(--faint)}
+
+  footer{
+    border-top:1px solid var(--line);padding:34px 0 44px;color:var(--faint);font-size:14px;
+  }
+  .foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot-in a:hover{color:var(--text)}
+
+  /* ============ sheet — request access, drag to dismiss ============ */
+  .sheet-scrim{
+    position:fixed;inset:0;z-index:60;background:var(--scrim);
+    opacity:0;visibility:hidden;
+  }
+  .sheet{
+    position:fixed;z-index:61;left:50%;bottom:0;width:min(560px, 100%);
+    transform:translate(-50%, 105%);
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(28px) saturate(180%);
+    backdrop-filter:blur(28px) saturate(180%);
+    border:1px solid var(--glass-brd);border-bottom:0;
+    border-radius:22px 22px 0 0;
+    box-shadow:var(--shadow);
+    padding:10px 28px calc(30px + env(safe-area-inset-bottom));
+    touch-action:none;
+    visibility:hidden;
+    will-change:transform;
+  }
+  @media (prefers-reduced-transparency: reduce){
+    .sheet{background:var(--bg-elev);-webkit-backdrop-filter:none;backdrop-filter:none}
+  }
+  .grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:4px auto 20px;cursor:grab}
+  .sheet h3{font-size:1.5rem;letter-spacing:-.016em;margin-bottom:8px}
+  .sheet .sub{font-size:15.5px}
+  .sheet .invite{margin-top:22px;justify-content:flex-start}
+  .sheet .fine{margin-top:16px;font-size:12.5px;color:var(--faint);text-align:center}
+  @media (prefers-reduced-motion: reduce){
+    .sheet{transition:opacity .25s ease !important}
   }
 </style>
 </head>
 <body>
-<div class="wrap">
+<script>document.documentElement.classList.add('js')</script>
 
-  <nav>
-    <div class="brand">
-      <span id="navRadar" style="flex:none;"></span>
-      txtradar
-    </div>
-    <div class="navlinks">
+<nav id="nav" aria-label="Main">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><span id="navRadar" style="flex:none;"></span>txtradar</a>
+    <div class="nav-links">
       <a href="#how">How it works</a>
       <a href="#who">Who it's for</a>
       <a href="#formats">Formats</a>
       <a href="#features">Features</a>
-      <a class="btn btn-primary cta-install" data-live="Add to Chrome" href="#get" style="padding:8px 15px; font-size:14px; color:#fff;">Get early access</a>
+      <a class="btn primary nav-cta cta-install" data-live="Add to Chrome" href="#get">Get early access</a>
     </div>
-  </nav>
+    <a class="btn primary nav-cta-solo cta-install" data-live="Add to Chrome" href="#get">Get early access</a>
+  </div>
+</nav>
 
-  <header class="hero">
-    <span id="heroRadar" style="display:block; margin-bottom:22px;"></span>
-    <span class="eyebrow">For everyone who reviews documents</span>
-    <h1>Scan anything.<br>Miss nothing.</h1>
-    <p class="tagline">The universal watch-list scanner — with AI that reads the document for you.</p>
-    <p class="lede">txtradar highlights your watch-list words — funders, clauses, red flags, names, keywords — across every document you review. Bank statements, contracts, web pages, spreadsheets, even photos. Nothing slips through.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#get">Request early access</a>
-      <a class="btn btn-ghost" href="#how">See how it works</a>
-      <span class="cta-note soon-note">Now in the Chrome Web Store — invite-only beta.</span>
+<header class="hero wrap" id="top">
+  <span id="heroRadar" class="hero-radar reveal"></span>
+  <span class="eyebrow reveal">For everyone who reviews documents</span>
+  <h1 class="reveal">Scan anything.<br>Miss nothing.</h1>
+  <p class="tagline reveal">The universal watch-list scanner — with AI that reads the document for you.</p>
+  <p class="lede reveal">txtradar highlights your watch-list words — funders, clauses, red flags, names, keywords — across every document you review. Bank statements, contracts, web pages, spreadsheets, even photos. <b>Nothing slips through.</b></p>
+  <div class="hero-ctas reveal">
+    <a class="btn primary cta-install" data-live="Add to Chrome — free" href="#get">Request early access</a>
+    <a class="btn quiet" href="#demo">See it in action</a>
+  </div>
+  <div class="hero-notes reveal">
+    <span class="badge soon-note">Now in the Chrome Web Store — invite-only beta</span>
+    <span>🔒 Private by design — highlighting happens locally in your browser. Your documents never leave your device.</span>
+  </div>
+  <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
+    <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
+  </a>
+  <div class="fmt-strip reveal">
+    <span class="label">one tool reads them all</span>
+    <span class="chip">PDF</span><span class="chip">Website</span><span class="chip">Excel</span><span class="chip">CSV</span><span class="chip">Word</span><span class="chip">Email</span><span class="chip">Images (OCR)</span>
+  </div>
+</header>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-inline:auto;text-align:center;align-items:center">
+      <span class="eyebrow">See it in action</span>
+      <h2>Your watch-list words light up right where you're reading</h2>
+      <p class="sub">— with a live tally beside them.</p>
     </div>
+    <div class="demo-frame reveal" id="demoFrame">
+      <div class="statement" role="img" aria-label="A bank statement with watch-list matches highlighted and a floating tally of categories">
+        <div class="st-head"><span>Bank statement · page 3</span><span>March</span></div>
+        <div class="st-row"><span class="date">03/04</span><span class="desc">ACH DEBIT <span class="mark funder" style="--i:0">SPECIALTY CAPITAL</span> DES:WEEKLY</span><span class="amt neg">−3,324.75</span></div>
+        <div class="st-row"><span class="date">03/06</span><span class="desc"><span class="mark odnsf" style="--i:1">OVERDRAFT ITEM FEE</span></span><span class="amt neg">−35.00</span></div>
+        <div class="st-row"><span class="date">03/09</span><span class="desc">HUNTER CAROLINE <span class="mark funder" style="--i:2">DES:CAPITAL</span> 71</span><span class="amt neg">−1,013.63</span></div>
+        <div class="st-row"><span class="date">03/11</span><span class="desc">MERCHANT SERVICE <span class="mark chbk" style="--i:3">MERCH CHBK</span></span><span class="amt neg">−580.00</span></div>
+        <div class="st-row"><span class="date">03/14</span><span class="desc"><span class="mark ret" style="--i:4">RETURN OF POSTED CHECK</span></span><span class="amt pos">+7,970.82</span></div>
+        <div class="st-row"><span class="date">03/18</span><span class="desc">ZELLE PAYMENT TO INDIVIDUAL</span><span class="amt neg">−5,000.00</span></div>
+        <div class="st-row"><span class="date">03/22</span><span class="desc"><span class="mark odnsf" style="--i:5">NSF RETURNED ITEM</span></span><span class="amt neg">−12.00</span></div>
+      </div>
+      <aside class="radar-panel" aria-hidden="true">
+        <div class="r-title"><span class="ping"></span>🛰 MCA Underwriting</div>
+        <div class="r-row"><span class="r-k"><span class="r-dot" style="background:var(--accent)"></span>Funders</span><span class="r-n" data-count="2">0</span></div>
+        <div class="r-row"><span class="r-k"><span class="r-dot" style="background:var(--amber)"></span>Overdraft / NSF</span><span class="r-n" data-count="2">0</span></div>
+        <div class="r-row"><span class="r-k"><span class="r-dot" style="background:var(--red)"></span>Chargebacks</span><span class="r-n" data-count="1">0</span></div>
+        <div class="r-row"><span class="r-k"><span class="r-dot" style="background:var(--violet)"></span>Returns</span><span class="r-n" data-count="1">0</span></div>
+      </aside>
+    </div>
+    <p class="demo-cap reveal">Build watch-lists once. txtradar applies them everywhere you read.</p>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>See the words you'd scroll past</h2>
+    </div>
+    <div class="grid feat">
+      <div class="card reveal">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 12 L18 8"/></svg></span>
+        <h3>Live highlighting</h3><p>PDFs and web pages light up as you read, with click-to-jump navigation to every hit.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.5 16.5 L15.5 18.5"/></svg></span>
+        <h3>Any file, one report</h3><p>Drop documents in any format — Excel, CSV, Word, email, or a scanned image — and get findings plus an Excel export.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/></svg></span>
+        <h3>AI triage</h3><p>Get a plain-English summary, key passages rated by importance, and suggested new watch words.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/><circle cx="18" cy="16" r="3"/><path d="M20.5 18.5 L22 20"/></svg></span>
+        <h3>Catches what you'd miss</h3><p>OCR-typo tolerance flags <code>0verdraft</code> and <code>Overdaft</code>; aliases catch every spelling of a name or term.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>From document to answers in seconds</h2>
+      <p class="sub">No modes to switch. txtradar detects what you're looking at and applies your active watch-lists automatically.</p>
+    </div>
+    <div class="grid steps">
+      <div class="card step reveal"><span class="n">1</span><h3>Build watch-lists by purpose</h3><p>Underwriting, contract review, compliance — funders, clauses, terms, names, keywords.</p></div>
+      <div class="card step reveal"><span class="n">2</span><h3>Open what you're reviewing</h3><p>A PDF, a web page, or a folder of mixed files. Turn on automatic scanning to work as you browse.</p></div>
+      <div class="card step reveal"><span class="n">3</span><h3>Act on what you find</h3><p>Jump to every hit, read the AI summary, export a findings report — and decide with confidence.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="formats">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Formats</span>
+      <h2>One scanner for every document</h2>
+      <p class="sub">Documents arrive in every shape. txtradar reads them all, then runs the same watch-lists across each.</p>
+    </div>
+    <div class="reveal">
+      <div class="seg" role="tablist" aria-label="Document formats" id="seg">
+        <div class="seg-ind" id="segInd"></div>
+        <button role="tab" aria-selected="true" data-pane="Highlighted live in place, with a floating panel of category counts and prev/next jump.">PDF &amp; Website</button>
+        <button role="tab" aria-selected="false" data-pane="Extracted and matched across sheets and pages, grouped into a findings view.">Excel, CSV &amp; Word</button>
+        <button role="tab" aria-selected="false" data-pane="MIME emails and scanned or photographed pages (OCR) — flagged just like the rest.">Email &amp; Images</button>
+      </div>
+      <p class="pane" id="pane"><b>Highlighted live in place</b>, with a floating panel of category counts and prev/next jump.</p>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Who it's for</span>
+      <h2>Made for anyone who reads for a living</h2>
+      <p class="sub">Same engine, different watch-lists. Start with the words that matter to your work.</p>
+    </div>
+    <div class="grid who">
+      <div class="card reveal"><h3>Underwriting &amp; lending</h3><p>Competing funders, NSFs, overdrafts, stacking, merchant names across bank statements.</p></div>
+      <div class="card reveal"><h3>Legal &amp; contracts</h3><p>Defined terms, party names, indemnity and liability clauses, risky language.</p></div>
+      <div class="card reveal"><h3>Compliance &amp; risk</h3><p>Prohibited terms, sanctioned entities, and policy keywords across filings and reports.</p></div>
+      <div class="card reveal"><h3>Research &amp; writing</h3><p>Names, citations, overused words, or banned phrases across drafts and sources.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Questions</span>
+      <h2>Questions</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Does txtradar send my documents anywhere?<span class="pl"></span></summary><div class="a">No. Highlighting and file scanning happen locally in your browser — the text of your PDFs, files, and pages is not sent to our servers. Text only leaves your device if you explicitly use an AI feature, which runs through a secure endpoint. See the <a href="/privacy">privacy policy</a>.</div></details>
+      <details><summary>What can it scan?<span class="pl"></span></summary><div class="a">PDFs and web pages (highlighted live, click-to-jump), plus Excel, CSV, Word, email, and images via OCR — each producing a findings view and an Excel report.</div></details>
+      <details><summary>Do I have to pick a mode?<span class="pl"></span></summary><div class="a">No. txtradar detects what you're looking at and applies your active watch-lists automatically. Each list can declare which media it runs on.</div></details>
+      <details><summary>Can my team share a watch-list?<span class="pl"></span></summary><div class="a">Yes. Shared lists sync in real time with roles (viewer, contributor, editor, owner) and per-word attribution so you can see who added what.</div></details>
+      <details><summary>Is it free?<span class="pl"></span></summary><div class="a">Yes — free to install, and your lists sync to your account across devices.</div></details>
+      <details><summary>Which browsers are supported?<span class="pl"></span></summary><div class="a">Chrome and Chromium-based browsers. Live in the Chrome Web Store as an invite-only beta — request access above.</div></details>
+    </div>
+    <p class="reveal" style="color:var(--faint);font-size:14.5px;margin-top:22px">More questions or something not working? Visit the <a href="/support" style="color:var(--accent)">support page</a>.</p>
+  </div>
+</section>
+
+<!-- Testimonials: remove style="display:none" to publish once you have REAL quotes. Placeholders below. -->
+<section id="loved" style="display:none">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Loved by reviewers</span>
+      <h2>Loved by people who review all day</h2>
+      <p class="sub">Replace these with real quotes from your early users.</p>
+    </div>
+    <div class="quotes">
+      <div class="card quote"><div class="stars">★★★★★</div><p>"Placeholder quote about how much time txtradar saves on statement review."</p><div class="who-line">— Name, Role · Company</div></div>
+      <div class="card quote"><div class="stars">★★★★★</div><p>"Placeholder quote about catching a stacked funder we'd have missed."</p><div class="who-line">— Name, Role · Company</div></div>
+      <div class="card quote"><div class="stars">★★★★★</div><p>"Placeholder quote about scanning contracts and spreadsheets in one tool."</p><div class="who-line">— Name, Role · Company</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="get">
+  <div class="wrap reveal">
+    <span class="eyebrow">Early access</span>
+    <h2 style="margin-top:14px">Put every document on your radar</h2>
+    <p class="sub">txtradar is live in the Chrome Web Store as an <b>invite-only beta</b>. Request access and we'll email you your invite link.</p>
+    <form id="inviteForm" class="invite" autocomplete="on">
+      <input type="text" id="invName" placeholder="Full name" required maxlength="80" />
+      <input type="email" id="invEmail" placeholder="Email" required maxlength="120" />
+      <input type="text" id="invNote" placeholder="What do you review? (optional)" maxlength="160" />
+      <button type="submit" class="btn primary" style="font-size:15px;">Request early access</button>
+      <p id="invMsg" class="cta-note" style="display:none; width:100%;"></p>
+    </form>
+    <a class="btn primary cta-install" data-live="Add to Chrome — free" href="#" style="display:none; font-size:16px; padding:13px 24px; margin-top:24px;">Add to Chrome</a>
     <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
       <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
     </a>
-    <div class="trust">🔒 Private by design — highlighting happens locally in your browser. Your documents never leave your device.</div>
-    <div class="pills">
-      <span class="label">one tool reads them all</span>
-      <span class="pill">PDF</span><span class="pill">Website</span><span class="pill">Excel</span>
-      <span class="pill">CSV</span><span class="pill">Word</span><span class="pill">Email</span><span class="pill">Images (OCR)</span>
-    </div>
-  </header>
+  </div>
+</section>
 
-  <section class="block" id="demo">
-    <h2>See it in action</h2>
-    <p class="sub">Your watch-list words light up right where you're reading — with a live tally beside them.</p>
-    <div class="demo">
-      <div class="bar"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span><span class="url">bank statement · page 3</span></div>
-      <div class="body">
-        <div class="doc">
-          <div class="row">03/04&nbsp; ACH DEBIT&nbsp; <mark class="b">SPECIALTY CAPITAL</mark> DES:WEEKLY&nbsp; −3,324.75</div>
-          <div class="row">03/06&nbsp; <mark>OVERDRAFT</mark> ITEM FEE&nbsp; −35.00</div>
-          <div class="row">03/09&nbsp; <mark class="b">HUNTER CAROLINE</mark> DES:CAPITAL 71&nbsp; −1,013.63</div>
-          <div class="row">03/11&nbsp; MERCHANT SERVICE&nbsp; <mark class="r">MERCH CHBK</mark>&nbsp; −580.00</div>
-          <div class="row">03/14&nbsp; RETURN OF POSTED CHECK&nbsp; +7,970.82</div>
-          <div class="row">03/18&nbsp; ZELLE PAYMENT TO INDIVIDUAL&nbsp; −5,000.00</div>
-          <div class="row">03/22&nbsp; <mark>NSF</mark> RETURNED ITEM&nbsp; −12.00</div>
-        </div>
-        <div class="panel">
-          <div class="ph"><span>🛰 MCA Underwriting</span><span>6</span></div>
-          <div class="pr"><span class="sw" style="background:#818cf8"></span>Funders <span style="margin-left:auto">2</span></div>
-          <div class="pr"><span class="sw" style="background:#0ea968"></span>Overdraft / NSF <span style="margin-left:auto">3</span></div>
-          <div class="pr"><span class="sw" style="background:#e24b4a"></span>Chargebacks <span style="margin-left:auto">1</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="features">
-    <h2>See the words you'd scroll past</h2>
-    <p class="sub">Build watch-lists once. txtradar applies them everywhere you read.</p>
-    <div class="grid">
-      <div class="card">
-        <div class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 12 L18 8"/></svg>
-        </div>
-        <h3>Live highlighting</h3>
-        <p>PDFs and web pages light up as you read, with click-to-jump navigation to every hit.</p>
-      </div>
-      <div class="card">
-        <div class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.5 16.5 L15.5 18.5"/></svg>
-        </div>
-        <h3>Any file, one report</h3>
-        <p>Drop documents in any format — Excel, CSV, Word, email, or a scanned image — and get findings plus an Excel export.</p>
-      </div>
-      <div class="card">
-        <div class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/></svg>
-        </div>
-        <h3>AI triage</h3>
-        <p>Get a plain-English summary, key passages rated by importance, and suggested new watch words.</p>
-      </div>
-      <div class="card">
-        <div class="ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/><circle cx="18" cy="16" r="3"/><path d="M20.5 18.5 L22 20"/></svg>
-        </div>
-        <h3>Catches what you'd miss</h3>
-        <p>OCR-typo tolerance flags <code>0verdraft</code> and <code>Overdaft</code>; aliases catch every spelling of a name or term.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="how">
-    <h2>From document to answers in seconds</h2>
-    <p class="sub">No modes to switch. txtradar detects what you're looking at and applies your active watch-lists automatically.</p>
-    <div class="steps">
-      <div class="step"><div class="n">1</div><h3>Build watch-lists by purpose</h3><p>Underwriting, contract review, compliance — funders, clauses, terms, names, keywords.</p></div>
-      <div class="step"><div class="n">2</div><h3>Open what you're reviewing</h3><p>A PDF, a web page, or a folder of mixed files. Turn on automatic scanning to work as you browse.</p></div>
-      <div class="step"><div class="n">3</div><h3>Act on what you find</h3><p>Jump to every hit, read the AI summary, export a findings report — and decide with confidence.</p></div>
-    </div>
-  </section>
-
-  <section class="block" id="formats">
-    <h2>One scanner for every document</h2>
-    <p class="sub">Documents arrive in every shape. txtradar reads them all, then runs the same watch-lists across each.</p>
-    <div class="grid">
-      <div class="card"><h3>PDF &amp; Website</h3><p>Highlighted live in place, with a floating panel of category counts and prev/next jump.</p></div>
-      <div class="card"><h3>Excel, CSV &amp; Word</h3><p>Extracted and matched across sheets and pages, grouped into a findings view.</p></div>
-      <div class="card"><h3>Email &amp; Images</h3><p>MIME emails and scanned or photographed pages (OCR) — flagged just like the rest.</p></div>
-    </div>
-  </section>
-
-  <section class="block" id="who">
-    <h2>Made for anyone who reads for a living</h2>
-    <p class="sub">Same engine, different watch-lists. Start with the words that matter to your work.</p>
-    <div class="grid">
-      <div class="card"><h3>Underwriting &amp; lending</h3><p>Competing funders, NSFs, overdrafts, stacking, merchant names across bank statements.</p></div>
-      <div class="card"><h3>Legal &amp; contracts</h3><p>Defined terms, party names, indemnity and liability clauses, risky language.</p></div>
-      <div class="card"><h3>Compliance &amp; risk</h3><p>Prohibited terms, sanctioned entities, and policy keywords across filings and reports.</p></div>
-      <div class="card"><h3>Research &amp; writing</h3><p>Names, citations, overused words, or banned phrases across drafts and sources.</p></div>
-    </div>
-  </section>
-
-  <section class="block" id="faq">
-    <h2>Questions</h2>
-    <div class="faq">
-      <details><summary>Does txtradar send my documents anywhere?</summary><p>No. Highlighting and file scanning happen locally in your browser — the text of your PDFs, files, and pages is not sent to our servers. Text only leaves your device if you explicitly use an AI feature, which runs through a secure endpoint. See the <a href="/privacy">privacy policy</a>.</p></details>
-      <details><summary>What can it scan?</summary><p>PDFs and web pages (highlighted live, click-to-jump), plus Excel, CSV, Word, email, and images via OCR — each producing a findings view and an Excel report.</p></details>
-      <details><summary>Do I have to pick a mode?</summary><p>No. txtradar detects what you're looking at and applies your active watch-lists automatically. Each list can declare which media it runs on.</p></details>
-      <details><summary>Can my team share a watch-list?</summary><p>Yes. Shared lists sync in real time with roles (viewer, contributor, editor, owner) and per-word attribution so you can see who added what.</p></details>
-      <details><summary>Is it free?</summary><p>Yes — free to install, and your lists sync to your account across devices.</p></details>
-      <details><summary>Which browsers are supported?</summary><p>Chrome and Chromium-based browsers. Live in the Chrome Web Store as an invite-only beta — request access above.</p></details>
-    </div>
-    <p class="sub" style="margin-top:22px;">More questions or something not working? Visit the <a href="/support" style="color:var(--accent-text);">support page</a>.</p>
-  </section>
-
-  <!-- Testimonials: remove style="display:none" to publish once you have REAL quotes. Placeholders below. -->
-  <section class="block" id="loved" style="display:none">
-    <h2>Loved by people who review all day</h2>
-    <p class="sub">Replace these with real quotes from your early users.</p>
-    <div class="quotes">
-      <div class="quote"><div class="stars">★★★★★</div><p>"Placeholder quote about how much time txtradar saves on statement review."</p><div class="who">— Name, Role · Company</div></div>
-      <div class="quote"><div class="stars">★★★★★</div><p>"Placeholder quote about catching a stacked funder we'd have missed."</p><div class="who">— Name, Role · Company</div></div>
-      <div class="quote"><div class="stars">★★★★★</div><p>"Placeholder quote about scanning contracts and spreadsheets in one tool."</p><div class="who">— Name, Role · Company</div></div>
-    </div>
-  </section>
-
-  <section id="get">
-    <div class="cta-band">
-      <h2>Put every document on your radar</h2>
-      <p>txtradar is live in the Chrome Web Store as an <b>invite-only beta</b>. Request access and we'll email you your invite link.</p>
-      <form id="inviteForm" class="invite" autocomplete="on">
-        <input type="text" id="invName" placeholder="Full name" required maxlength="80" />
-        <input type="email" id="invEmail" placeholder="Email" required maxlength="120" />
-        <input type="text" id="invNote" placeholder="What do you review? (optional)" maxlength="160" />
-        <button type="submit" class="btn btn-primary" style="font-size:15px;">Request early access</button>
-        <p id="invMsg" class="cta-note" style="display:none; width:100%;"></p>
-      </form>
-      <a class="btn btn-primary cta-install" data-live="Add to Chrome — free" href="#" style="display:none; font-size:16px; padding:13px 24px;">Add to Chrome</a>
-      <a class="store-badge" href="#" rel="noopener" target="_blank" aria-label="Available in the Chrome Web Store">
-        <img src="assets/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" />
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <div>© <span id="yr"></span> txtradar · <a href="/support" style="color:inherit;">Support</a> · <a href="/privacy" style="color:inherit;">Privacy</a></div>
+<footer>
+  <div class="wrap foot-in">
+    <div>© <span id="yr"></span> txtradar · <a href="/support">Support</a> · <a href="/privacy">Privacy</a></div>
     <div>Scan anything. Miss nothing.</div>
-  </footer>
+  </div>
+</footer>
 
+<!-- request-access sheet: borrows the #inviteForm node while open, returns it on dismiss -->
+<div class="sheet-scrim" id="sheetScrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Request early access" tabindex="-1">
+  <div class="grab" aria-hidden="true"></div>
+  <h3>Request early access</h3>
+  <p class="sub">Invite-only beta on the Chrome Web Store. Leave your details and we'll email your invite link.</p>
+  <div id="sheetFormSlot"></div>
 </div>
+
 <script>
   document.getElementById("yr").textContent = new Date().getFullYear();
 
@@ -408,6 +658,197 @@
     Radar.mount(document.getElementById("navRadar"), { size: 30 });
     Radar.mount(document.getElementById("heroRadar"), { size: 132 });
   }
+</script>
+<script>
+(() => {
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- tiny spring engine: velocity-aware, retargetable, interruptible ---------- */
+  function spring(onUpdate, onRest){
+    let pos = 0, vel = 0, target = 0, k = 0, c = 0, raf = null, last = 0;
+    function config(response, damping){          // Apple's two designer params
+      k = Math.pow((2 * Math.PI) / response, 2); // stiffness from response
+      c = 2 * damping * Math.sqrt(k);            // damping coefficient from ratio
+    }
+    config(0.4, 1);
+    function frame(now){
+      let dt = Math.min((now - last) / 1000, 0.032); last = now;
+      const h = 1/240; let t = dt;
+      while (t > 0){
+        const s = Math.min(h, t);
+        const a = -k * (pos - target) - c * vel;
+        vel += a * s; pos += vel * s; t -= s;
+      }
+      if (Math.abs(pos - target) < 0.05 && Math.abs(vel) < 0.05){
+        pos = target; vel = 0; raf = null; onUpdate(pos);
+        onRest && onRest(); return;
+      }
+      onUpdate(pos);
+      raf = requestAnimationFrame(frame);
+    }
+    return {
+      get pos(){ return pos },
+      set(v){ pos = v; vel = 0; onUpdate(pos) },
+      to(t2, opts = {}){
+        target = t2;
+        if (opts.response || opts.damping) config(opts.response || 0.4, opts.damping ?? 1);
+        if ('velocity' in opts) vel = opts.velocity;   // velocity handoff
+        if (!raf){ last = performance.now(); raf = requestAnimationFrame(frame) }
+      },
+      stop(){ if (raf) cancelAnimationFrame(raf); raf = null; vel = 0 },
+      get animating(){ return !!raf }
+    };
+  }
+
+  /* Apple's momentum projection + rubber-band resistance */
+  const project = (v, rate = 0.998) => (v / 1000) * rate / (1 - rate);
+  const rubberband = (x, dim, cnst = 0.55) => (x * dim * cnst) / (dim + cnst * Math.abs(x));
+
+  /* ---------- nav scroll edge ---------- */
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), {passive:true});
+
+  /* ---------- staged reveals ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target) }
+  }), {rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    if (el.closest('.hero')) el.style.transitionDelay = (i * 90) + 'ms';
+    io.observe(el);
+  });
+
+  /* ---------- demo: sweep highlights + count the tally up ---------- */
+  const demo = document.getElementById('demoFrame');
+  const demoIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    demo.classList.add('live'); demoIO.disconnect();
+    document.querySelectorAll('.r-n').forEach((el, i) => {
+      const n = +el.dataset.count;
+      if (reduceMotion.matches){ el.textContent = n; return }
+      let cur = 0;
+      const step = () => { el.textContent = ++cur; if (cur < n) setTimeout(step, 300) };
+      setTimeout(step, 500 + i * 260);
+    });
+  }), {threshold: 0.5});
+  demoIO.observe(demo);
+
+  /* ---------- segmented control: springy indicator ---------- */
+  const seg = document.getElementById('seg'), ind = document.getElementById('segInd'),
+        pane = document.getElementById('pane'),
+        tabs = [...seg.querySelectorAll('button')];
+  const sx = spring(v => ind.style.transform = `translateX(${v}px)`);
+  const sw = spring(v => ind.style.width = v + 'px');
+  function placeInd(btn, animate){
+    const x = btn.offsetLeft - 4, w = btn.offsetWidth;
+    if (!animate || reduceMotion.matches){ sx.set(x); sw.set(w); return }
+    sx.to(x, {response:0.35, damping:0.8});
+    sw.to(w, {response:0.35, damping:0.9});
+  }
+  tabs.forEach(btn => btn.addEventListener('click', () => {
+    tabs.forEach(b => b.setAttribute('aria-selected', b === btn));
+    placeInd(btn, true);
+    pane.style.opacity = 0;
+    setTimeout(() => { pane.textContent = btn.dataset.pane; pane.style.opacity = 1 }, 160);
+  }));
+  placeInd(tabs[0], false);
+  addEventListener('resize', () => placeInd(tabs.find(b => b.getAttribute('aria-selected') === 'true'), false));
+
+  /* ---------- request-access sheet: 1:1 drag, rubber-band, projection, interruptible ----------
+     The sheet borrows the #inviteForm node while open and returns it to the
+     #get band on dismiss, so there is exactly one form (and one set of IDs). */
+  const sheet = document.getElementById('sheet'), scrim = document.getElementById('sheetScrim');
+  const formSlot = document.getElementById('sheetFormSlot');
+  const inviteForm = document.getElementById('inviteForm');
+  const getBand = document.getElementById('get');
+  const formHome = inviteForm ? inviteForm.parentElement : null;
+  const formAnchor = inviteForm ? inviteForm.nextElementSibling : null;
+  let sheetH = 0, open = false, lastFocus = null;
+  const sy = spring(y => {
+    sheet.style.transform = `translate(-50%, ${y}px)`;
+    scrim.style.opacity = sheetH ? Math.max(0, 1 - y / sheetH) : 0;
+  }, () => {
+    if (sy.pos >= sheetH - 0.5 && !open) hideDone();
+  });
+
+  function showSheet(trigger){
+    lastFocus = trigger || document.activeElement;
+    if (inviteForm && formSlot && !formSlot.contains(inviteForm)) formSlot.appendChild(inviteForm);
+    sheet.style.visibility = 'visible';
+    scrim.style.visibility = 'visible';
+    sheetH = sheet.offsetHeight + 8;
+    open = true;
+    document.body.style.overflow = 'hidden';
+    if (reduceMotion.matches){
+      sheet.style.opacity = 0; sy.set(0);
+      requestAnimationFrame(() => { sheet.style.opacity = 1 });
+    } else {
+      sy.set(sheetH);
+      sy.to(0, {response:0.42, damping:0.9});
+    }
+    sheet.focus({preventScroll:true});
+  }
+  function dismiss(velocity = 0){
+    open = false;
+    if (reduceMotion.matches){
+      sheet.style.opacity = 0;
+      setTimeout(hideDone, 250);
+      scrim.style.opacity = 0;
+      return;
+    }
+    sy.to(sheetH, {response:0.38, damping:1, velocity});
+  }
+  function hideDone(){
+    sheet.style.visibility = 'hidden'; scrim.style.visibility = 'hidden';
+    sheet.style.opacity = ''; document.body.style.overflow = '';
+    if (inviteForm && formHome && formSlot.contains(inviteForm)) formHome.insertBefore(inviteForm, formAnchor);
+    lastFocus && lastFocus.focus && lastFocus.focus();
+  }
+  // CTAs open the sheet only while in invite-beta mode; once STORE_URL is set
+  // the flip above has already turned them into store links.
+  if (!STORE_URL && inviteForm){
+    document.querySelectorAll('.cta-install').forEach(a =>
+      a.addEventListener('click', e => { e.preventDefault(); showSheet(e.currentTarget) }));
+  }
+  scrim.addEventListener('click', () => dismiss());
+  addEventListener('keydown', e => { if (e.key === 'Escape' && (open || sy.animating)) dismiss() });
+
+  /* drag — pointer events + capture; grab it even mid-animation */
+  let dragging = false, grabOffset = 0, hist = [];
+  sheet.addEventListener('pointerdown', e => {
+    if (e.target.closest('input, button, a')) return;   // let controls be controls
+    if (reduceMotion.matches) return;
+    sy.stop();                                          // interrupt: freeze at presentation value
+    dragging = true;
+    open = true;                                        // grabbing an exiting sheet rescues it
+    sheet.setPointerCapture(e.pointerId);
+    grabOffset = e.clientY - sy.pos;                    // respect where they grabbed
+    hist = [{t: e.timeStamp, y: sy.pos}];
+  });
+  sheet.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    let y = e.clientY - grabOffset;                     // 1:1 — glued to the finger
+    if (y < 0) y = rubberband(y, sheetH);               // soft boundary above rest
+    sy.set(y);
+    hist.push({t: e.timeStamp, y});
+    if (hist.length > 6) hist.shift();
+  });
+  function release(e){
+    if (!dragging) return;
+    dragging = false;
+    const a = hist[0], b = hist[hist.length - 1];
+    const dt = (b.t - a.t) / 1000;
+    const v = dt > 0 ? (b.y - a.y) / dt : 0;            // px/s at the finger
+    const projected = sy.pos + project(v);              // animate to where it's GOING
+    if (projected > sheetH * 0.4){
+      dismiss(v);                                       // hand the finger's velocity to the spring
+    } else {
+      open = true;
+      sy.to(0, {response:0.4, damping:0.8, velocity:v}); // momentum preceded it → slight bounce
+    }
+  }
+  sheet.addEventListener('pointerup', release);
+  sheet.addEventListener('pointercancel', release);
+})();
 </script>
 </body>
 </html>
