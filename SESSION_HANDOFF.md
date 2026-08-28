@@ -1,10 +1,10 @@
-State as of: 4388632  ·  Branch: main  ·  Written: 2026-08-28
+State as of: ed2052f  ·  Branch: main  ·  Written: 2026-08-28
 This session: APPLE_REDESIGN  ·  Archive copy: docs/handoffs/HANDOFF_2026-08-28_APPLE_REDESIGN.md
 Previous handoff: none — first handoff in this repo
 
 # 👉 START HERE
 
-**Status in one line:** Apple-style fluid redesign of index.html shipped and verified live on txtradar.com on 2026-08-28; everything else in the repo untouched.
+**Status in one line:** Apple-style redesign shipped across the WHOLE site on 2026-08-28 — index (`7d5831a`, verified live), support + privacy (`f606574`, verified live), confirmed (`ed2052f`). Waitlist form live-tested and working.
 
 ## ⛔ READ FIRST — these will burn your session
 1. **Push to main = instant public deploy** (GitHub Pages + CNAME). There is no staging. Verify locally before pushing — a static server config named `txtradar-site` exists in the ceo-dash project's `.claude/launch.json` (port 8794).
@@ -23,7 +23,7 @@ Previous handoff: none — first handoff in this repo
 
 ## Not done / unverified
 - [x] Waitlist form live-tested 2026-08-28: submit on production succeeded and a duplicate resubmit returned the 409 "already on the list" path — row confirmed in Supabase `waitlist`. A TEST ROW remains there (`Form Test (Claude)` / adam+formtest@adammadar.com, note "end-to-end form test — ignore") — delete at will; it will appear in the 2026-08-29 waitlist digest email.
-- [ ] support.html / privacy.html / confirmed.html still have the OLD design — they work, they just don't match index.html yet
+- [x] support.html / privacy.html ported 2026-08-28 (`f606574`, verified live); confirmed.html ported (`ed2052f`) — content on all three unchanged, only the styling shell. Doc pages deliberately get the quiet treatment: no springs/sheet/reveals.
 - [ ] Testimonials section still hidden (`#loved`, display:none) awaiting real quotes — carried over from before
 
 ## Don'ts — traps and settled decisions
@@ -34,4 +34,4 @@ Previous handoff: none — first handoff in this repo
 - Reference mockup this shipped from: https://claude.ai/code/artifact/7c7c20c0-487f-401e-aded-f60af9c5998a (private artifact on Adam's account)
 
 ## Next action
-Decide whether to port the Apple treatment to the support/privacy/confirmed pages (they still have the old design); delete the waitlist test row when convenient.
+Nothing urgent — delete the waitlist test row when convenient, and publish real testimonials in `#loved` when quotes exist. When the store listing goes live, paste the URL into `STORE_URL` in index.html and redeploy.
