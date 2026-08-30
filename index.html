@@ -205,7 +205,7 @@
   .st-row .amt.neg{color:var(--red)}
   .st-row .amt.pos{color:var(--accent)}
   .mark{border-radius:5px;padding:1px 5px;margin:0 -2px;position:relative;color:var(--text)}
-  .mark{background:linear-gradient(var(--mk,var(--accent-soft)),var(--mk,var(--accent-soft))) no-repeat left/0% 100%}
+  .mark{background:linear-gradient(var(--mk,transparent),var(--mk,transparent)) no-repeat left/0% 100%}
   .js .demo-frame.live .mark{animation:sweep .5s cubic-bezier(.25,1,.4,1) forwards;animation-delay:calc(.25s + var(--i)*.32s)}
   .no-js .mark, .demo-frame:not(.live) .mark{background-size:100% 100%}
   @keyframes sweep{to{background-size:100% 100%}}
@@ -343,6 +343,68 @@
   .foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .foot-in a:hover{color:var(--text)}
 
+  /* ============ notch — floating watch-list switcher ============ */
+  .notch{
+    position:fixed;left:50%;bottom:18px;z-index:55;
+    transform:translateX(-50%) translateY(110px);
+    display:flex;align-items:center;gap:13px;
+    background:var(--glass);border:1px solid var(--glass-brd);border-radius:980px;
+    -webkit-backdrop-filter:blur(22px) saturate(170%);
+    backdrop-filter:blur(22px) saturate(170%);
+    box-shadow:0 16px 50px rgba(0,0,0,.35);
+    padding:11px 20px;cursor:pointer;
+    font-size:13.5px;font-weight:600;letter-spacing:-.005em;
+    transition:transform .7s cubic-bezier(.34,1.4,.4,1);
+    -webkit-user-select:none;user-select:none;white-space:nowrap;
+  }
+  .notch.show{transform:translateX(-50%) translateY(0)}
+  .notch:active{transform:translateX(-50%) translateY(0) scale(.97)}
+  .notch .n-ping{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  @media (prefers-reduced-motion: no-preference){
+    .notch .n-ping{animation:tally-ping 2.4s ease-out infinite}
+  }
+  .notch .n-label{color:var(--faint);font-weight:500}
+  .notch .n-sel{color:var(--text)}
+  .notch .n-caret{color:var(--faint);font-size:10px;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+  .notch.open .n-caret{transform:rotate(180deg)}
+  .notch .n-div{width:1px;height:16px;background:var(--line);flex:none}
+  .notch .n-count{color:var(--accent);font-variant-numeric:tabular-nums}
+  .notch .n-opts{
+    position:absolute;bottom:calc(100% + 10px);left:50%;
+    transform:translateX(-50%) translateY(10px) scale(.88);
+    transform-origin:bottom center;
+    opacity:0;pointer-events:none;
+    display:flex;gap:4px;padding:5px;
+    background:var(--glass);border:1px solid var(--glass-brd);border-radius:16px;
+    -webkit-backdrop-filter:blur(22px) saturate(170%);
+    backdrop-filter:blur(22px) saturate(170%);
+    box-shadow:0 16px 50px rgba(0,0,0,.35);
+    transition:opacity .3s ease, transform .38s cubic-bezier(.34,1.56,.64,1);
+  }
+  .notch.open .n-opts{opacity:1;transform:translateX(-50%);pointer-events:auto}
+  .notch .n-opts button{
+    border:0;background:none;cursor:pointer;
+    padding:9px 15px;border-radius:11px;
+    font:600 13.5px/1 inherit;font-family:inherit;color:var(--muted);
+    transition:color .15s, background .15s, transform .2s;
+    white-space:nowrap;
+  }
+  .notch .n-opts button:hover{color:var(--text);background:rgba(127,127,127,.12)}
+  .notch .n-opts button:active{transform:scale(.95)}
+  .notch .n-opts button[aria-selected="true"]{color:var(--accent);background:var(--accent-soft)}
+  @media (prefers-reduced-transparency: reduce){
+    .notch, .notch .n-opts{background:var(--bg-elev);-webkit-backdrop-filter:none;backdrop-filter:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .notch{transition:opacity .3s ease;transform:translateX(-50%);opacity:0;visibility:hidden}
+    .notch.show{opacity:1;visibility:visible}
+    .notch .n-opts{transition:opacity .25s ease}
+    .notch.open .n-opts{transform:translateX(-50%)}
+  }
+  @media (max-width:640px){
+    .notch{max-width:calc(100vw - 24px);overflow-x:auto}
+  }
+
   /* ============ sheet — request access, drag to dismiss ============ */
   .sheet-scrim{
     position:fixed;inset:0;z-index:60;background:var(--scrim);
@@ -425,13 +487,13 @@
     <div class="demo-frame reveal" id="demoFrame">
       <div class="statement" role="img" aria-label="A bank statement with watch-list matches highlighted and a floating tally of categories">
         <div class="st-head"><span>Bank statement · page 3</span><span>March</span></div>
-        <div class="st-row"><span class="date">03/04</span><span class="desc">ACH DEBIT <span class="mark funder" style="--i:0">SPECIALTY CAPITAL</span> DES:WEEKLY</span><span class="amt neg">−3,324.75</span></div>
-        <div class="st-row"><span class="date">03/06</span><span class="desc"><span class="mark odnsf" style="--i:1">OVERDRAFT ITEM FEE</span></span><span class="amt neg">−35.00</span></div>
-        <div class="st-row"><span class="date">03/09</span><span class="desc">HUNTER CAROLINE <span class="mark funder" style="--i:2">DES:CAPITAL</span> 71</span><span class="amt neg">−1,013.63</span></div>
-        <div class="st-row"><span class="date">03/11</span><span class="desc">MERCHANT SERVICE <span class="mark chbk" style="--i:3">MERCH CHBK</span></span><span class="amt neg">−580.00</span></div>
-        <div class="st-row"><span class="date">03/14</span><span class="desc"><span class="mark ret" style="--i:4">RETURN OF POSTED CHECK</span></span><span class="amt pos">+7,970.82</span></div>
-        <div class="st-row"><span class="date">03/18</span><span class="desc">ZELLE PAYMENT TO INDIVIDUAL</span><span class="amt neg">−5,000.00</span></div>
-        <div class="st-row"><span class="date">03/22</span><span class="desc"><span class="mark odnsf" style="--i:5">NSF RETURNED ITEM</span></span><span class="amt neg">−12.00</span></div>
+        <div class="st-row"><span class="date">03/04</span><span class="desc">ACH DEBIT <span class="mark funder" data-m="m1" style="--i:0">SPECIALTY CAPITAL</span> DES:WEEKLY</span><span class="amt neg">−3,324.75</span></div>
+        <div class="st-row"><span class="date">03/06</span><span class="desc"><span class="mark odnsf" data-m="m2" style="--i:1">OVERDRAFT ITEM FEE</span></span><span class="amt neg">−35.00</span></div>
+        <div class="st-row"><span class="date">03/09</span><span class="desc"><span class="mark funder" data-m="m3" style="--i:2">HUNTER CAROLINE DES:CAPITAL</span> 71</span><span class="amt neg">−1,013.63</span></div>
+        <div class="st-row"><span class="date">03/11</span><span class="desc">MERCHANT SERVICE <span class="mark chbk" data-m="m4" style="--i:3">MERCH CHBK</span></span><span class="amt neg">−580.00</span></div>
+        <div class="st-row"><span class="date">03/14</span><span class="desc"><span class="mark ret" data-m="m5" style="--i:4">RETURN OF POSTED CHECK</span></span><span class="amt pos">+7,970.82</span></div>
+        <div class="st-row"><span class="date">03/18</span><span class="desc"><span class="mark" data-m="m6" style="--i:5">ZELLE PAYMENT TO INDIVIDUAL</span></span><span class="amt neg">−5,000.00</span></div>
+        <div class="st-row"><span class="date">03/22</span><span class="desc"><span class="mark odnsf" data-m="m7" style="--i:6">NSF RETURNED ITEM</span></span><span class="amt neg">−12.00</span></div>
       </div>
       <aside class="radar-panel" aria-hidden="true">
         <div class="r-title"><span class="ping"></span>🛰 MCA Underwriting</div>
@@ -582,6 +644,21 @@
   </div>
 </footer>
 
+<!-- floating watch-list notch: switches the demo between watch-lists -->
+<div class="notch" id="notch" role="toolbar" aria-label="Active watch-list">
+  <span class="n-ping" aria-hidden="true"></span>
+  <span class="n-label">Watch-list</span>
+  <span class="n-sel" id="notchSel">MCA Underwriting</span>
+  <span class="n-caret" aria-hidden="true">▲</span>
+  <span class="n-div" aria-hidden="true"></span>
+  <span class="n-count" id="notchCount">6 hits</span>
+  <div class="n-opts" id="notchOpts" role="listbox">
+    <button role="option" data-list="mca" aria-selected="true">MCA Underwriting</button>
+    <button role="option" data-list="risk" aria-selected="false">Compliance &amp; Risk</button>
+    <button role="option" data-list="names" aria-selected="false">Names &amp; Parties</button>
+  </div>
+</div>
+
 <!-- request-access sheet: borrows the #inviteForm node while open, returns it on dismiss -->
 <div class="sheet-scrim" id="sheetScrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Request early access" tabindex="-1">
@@ -731,6 +808,59 @@
     });
   }), {threshold: 0.5});
   demoIO.observe(demo);
+
+  /* ---------- notch: floating watch-list switcher drives the demo ---------- */
+  const notch = document.getElementById('notch');
+  const WATCHLISTS = {
+    mca:   { name:'MCA Underwriting',
+             marks:{m1:'funder', m3:'funder', m2:'odnsf', m7:'odnsf', m4:'chbk', m5:'ret'},
+             rows:[['--accent','Funders',2],['--amber','Overdraft / NSF',2],['--red','Chargebacks',1],['--violet','Returns',1]] },
+    risk:  { name:'Compliance & Risk',
+             marks:{m2:'odnsf', m7:'odnsf', m6:'ret', m4:'chbk'},
+             rows:[['--amber','NSF / Overdraft',2],['--violet','External transfers',1],['--red','Chargebacks',1]] },
+    names: { name:'Names & Parties',
+             marks:{m1:'funder', m3:'funder'},
+             rows:[['--accent','Party matches',2]] }
+  };
+  function applyList(key){
+    const list = WATCHLISTS[key];
+    let idx = 0;
+    document.querySelectorAll('.mark').forEach(m => {
+      m.classList.remove('funder','odnsf','chbk','ret');
+      const cat = list.marks[m.dataset.m];
+      if (cat){ m.classList.add(cat); m.style.setProperty('--i', idx++); }
+    });
+    demo.classList.remove('live');
+    void demo.offsetWidth;
+    demo.classList.add('live');
+    const panel = document.querySelector('.radar-panel');
+    const total = list.rows.reduce((s, r) => s + r[2], 0);
+    panel.innerHTML = '<div class="r-title"><span class="ping"></span>🛰 ' + list.name + '</div>' +
+      list.rows.map(r =>
+        '<div class="r-row"><span class="r-k"><span class="r-dot" style="background:var(' + r[0] + ')"></span>' + r[1] +
+        '</span><span class="r-n">' + r[2] + '</span></div>').join('');
+    document.getElementById('notchSel').textContent = list.name;
+    document.getElementById('notchCount').textContent = total + ' hit' + (total === 1 ? '' : 's');
+    document.querySelectorAll('#notchOpts button').forEach(b =>
+      b.setAttribute('aria-selected', String(b.dataset.list === key)));
+  }
+  const notchIO = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ notch.classList.add('show'); notchIO.disconnect(); }
+  }), {threshold:.3});
+  notchIO.observe(demo);
+  notch.addEventListener('click', e => {
+    const opt = e.target.closest('[data-list]');
+    if (opt){
+      applyList(opt.dataset.list);
+      notch.classList.remove('open');
+      document.getElementById('demoFrame').scrollIntoView({block:'center'});
+      return;
+    }
+    notch.classList.toggle('open');
+  });
+  addEventListener('click', e => {
+    if (!notch.contains(e.target)) notch.classList.remove('open');
+  }, true);
 
   /* ---------- segmented control: springy indicator ---------- */
   const seg = document.getElementById('seg'), ind = document.getElementById('segInd'),
