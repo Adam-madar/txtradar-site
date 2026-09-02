@@ -1,37 +1,37 @@
-State as of: ed2052f  ·  Branch: main  ·  Written: 2026-08-28
-This session: APPLE_REDESIGN  ·  Archive copy: docs/handoffs/HANDOFF_2026-08-28_APPLE_REDESIGN.md
-Previous handoff: none — first handoff in this repo
+State as of: 65d7056  ·  Branch: main  ·  Written: 2026-09-02
+This session: SHOWCASE_VIDEO  ·  Archive copy: docs/handoffs/HANDOFF_2026-09-02_SHOWCASE_VIDEO.md
+Previous handoff: docs/handoffs/HANDOFF_2026-08-28_APPLE_REDESIGN.md
 
 # 👉 START HERE
 
-**Status in one line:** Apple-style redesign shipped across the WHOLE site on 2026-08-28 — index (`7d5831a`, verified live), support + privacy (`f606574`, verified live), confirmed (`ed2052f`). Waitlist form live-tested and working.
+**Status in one line:** Apple-style site live with interactive demo + watch-list notch (`8518a22`) and a one-minute "Watch the tour" showcase video (`65d7056`, verified live 2026-09-02).
 
 ## ⛔ READ FIRST — these will burn your session
-1. **Push to main = instant public deploy** (GitHub Pages + CNAME). There is no staging. Verify locally before pushing — a static server config named `txtradar-site` exists in the ceo-dash project's `.claude/launch.json` (port 8794).
+1. **Push to main = instant public deploy** (GitHub Pages + CNAME). No staging. Verify locally first — static server config `txtradar-site` (port 8794) lives in the ceo-dash project's `.claude/launch.json`.
 2. **This repo IS the public website.** Every committed file is fetchable at txtradar.com/<path>. Never commit anything sensitive.
-3. **index.html carries live wiring that must survive any edit:** the `STORE_URL` flip (paste store URL → CTAs become install links, invite form hides — no other edits needed), the Supabase waitlist form (`#inviteForm`, submit code near the bottom), and the Chrome Web Store badge rule (only visible once STORE_URL is set, must link to the listing).
-4. **The request-access sheet BORROWS the `#inviteForm` DOM node** while open and returns it on dismiss — there is exactly one form and one set of IDs. Don't duplicate the form or its IDs anywhere.
+3. **index.html live wiring that must survive any edit:** the `STORE_URL` flip (paste store URL → CTAs become install links, invite form hides), the Supabase waitlist form (`#inviteForm`, single DOM node — the request-access sheet BORROWS it while open; never duplicate the form or its IDs), the Chrome Web Store badge rule, and the watch-list notch (`#notch`) that drives the interactive demo.
+4. **The tour video section (`#tour`) references `assets/showcase-tour.webm/.mp4` + `showcase-poster.jpg` by exact path.** The video is GENERATED — sources + render pipeline are NOT in this repo: `Desktop\AI AMM\TEXT RADAR\promo-videos\sources\` (see archive handoff for the rebuild recipe). Don't re-record; re-render.
 
 ## Deployed vs committed
-- Committed on `main`: `7d5831a`
-- Live in production:  `7d5831a` — verified 2026-08-28 by polling txtradar.com for the new page's `sheetFormSlot` marker
-- Verify with: `curl -s https://txtradar.com | grep -c sheetFormSlot` (1 = new page live)
+- Committed on `main`: `65d7056`
+- Live in production:  `65d7056` — verified 2026-09-02
+- Verify with: `curl -s https://txtradar.com | grep -c tour-frame` (1 = tour section live)
 
 ## Working tree
-- Clean at handoff time. No dirty or untracked-on-purpose files in this repo.
-- **Never commit:** anything with borrower/client data, API keys beyond the already-public Supabase anon key that ships in index.html by design.
+- Clean at handoff time. Nothing dirty or untracked on purpose.
+- **Never commit:** borrower/client data, keys beyond the by-design-public Supabase anon key.
 
 ## Not done / unverified
-- [x] Waitlist form live-tested 2026-08-28: submit on production succeeded and a duplicate resubmit returned the 409 "already on the list" path — row confirmed in Supabase `waitlist`. A TEST ROW remains there (`Form Test (Claude)` / adam+formtest@adammadar.com, note "end-to-end form test — ignore") — delete at will; it will appear in the 2026-08-29 waitlist digest email.
-- [x] support.html / privacy.html ported 2026-08-28 (`f606574`, verified live); confirmed.html ported (`ed2052f`) — content on all three unchanged, only the styling shell. Doc pages deliberately get the quiet treatment: no springs/sheet/reveals.
-- [ ] Testimonials section still hidden (`#loved`, display:none) awaiting real quotes — carried over from before
+- [ ] Testimonials section still hidden (`#loved`, display:none) awaiting real quotes
+- [ ] Waitlist TEST ROW from 2026-08-28 may still be in Supabase `waitlist` (`Form Test (Claude)`) — delete at will
+- [ ] STORE_URL still empty — when the Chrome Web Store listing goes live, paste the URL into `STORE_URL` in index.html and redeploy
 
 ## Don'ts — traps and settled decisions
-- ⛔ Settled 2026-08-28: theme is ADAPTIVE (light default, dark via prefers-color-scheme), Adam chose this over dark-only. Don't force dark.
-- ⛔ `assets/radar.js` is the brand radar (also used by the Chrome extension's UI) — kept deliberately untouched in the redesign. Mounts: navRadar 30px, heroRadar 132px. Don't restyle or replace it.
-- ⛔ The design system is the `apple-site` skill (global, `~/.claude/skills/apple-site`): system font stack, spring physics (not CSS keyframes) for gesture-driven motion, reduced-motion/-transparency fallbacks. Keep new UI consistent with it.
-- ⛔ Rollback, if the redesign misbehaves: `git revert 7d5831a` + push — don't hand-edit backwards.
-- Reference mockup this shipped from: https://claude.ai/code/artifact/7c7c20c0-487f-401e-aded-f60af9c5998a (private artifact on Adam's account)
+- ⛔ Theme is ADAPTIVE (light default, dark via prefers-color-scheme) — settled 2026-08-28, don't force dark.
+- ⛔ `assets/radar.js` is the shared brand radar (extension uses it too) — don't restyle or replace.
+- ⛔ Design system = `apple-site` skill (system fonts, spring physics, reduced-motion fallbacks) — keep new UI consistent.
+- ⛔ Tour video: NO autoplay (settled 2026-09-02 — 5 MB, mobile visitors); click-to-play with poster.
+- ⛔ Video edits happen in the scene HTML sources + re-render, never by editing the encoded files.
 
 ## Next action
-Nothing urgent — delete the waitlist test row when convenient, and publish real testimonials in `#loved` when quotes exist. When the store listing goes live, paste the URL into `STORE_URL` in index.html and redeploy.
+When the Chrome Web Store listing is live: set `STORE_URL` in index.html, verify locally on 8794, push.
