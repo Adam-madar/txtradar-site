@@ -186,6 +186,11 @@
 
   /* ============ demo — statement scan ============ */
   .demo-frame{position:relative;max-width:760px;margin:0 auto}
+
+  /* ============ tour — showcase video ============ */
+  .tour-frame{max-width:900px;margin:0 auto;border-radius:20px;overflow:hidden;
+    border:1px solid var(--line);background:#0a0d12;box-shadow:var(--shadow)}
+  .tour-frame video{display:block;width:100%;height:auto}
   .statement{
     background:var(--card);border:1px solid var(--line);border-radius:20px;
     box-shadow:var(--shadow);
@@ -545,6 +550,23 @@
       <div class="card step reveal"><span class="n">1</span><h3>Build watch-lists by purpose</h3><p>Underwriting, contract review, compliance — funders, clauses, terms, names, keywords.</p></div>
       <div class="card step reveal"><span class="n">2</span><h3>Open what you're reviewing</h3><p>A PDF, a web page, or a folder of mixed files. Turn on automatic scanning to work as you browse.</p></div>
       <div class="card step reveal"><span class="n">3</span><h3>Act on what you find</h3><p>Jump to every hit, read the AI summary, export a findings report — and decide with confidence.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tour">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-inline:auto;text-align:center;align-items:center">
+      <span class="eyebrow">Watch the tour</span>
+      <h2>One minute, end to end</h2>
+      <p class="sub">A contract scan, a bank statement, watch-lists with AKAs — and the findings report at the end.</p>
+    </div>
+    <div class="tour-frame reveal">
+      <video controls playsinline preload="metadata" poster="assets/showcase-poster.jpg"
+             aria-label="One-minute tour of txtradar: scanning a contract and a bank statement, adding watch-list names and AKAs, and exporting a findings report">
+        <source src="assets/showcase-tour.webm" type="video/webm">
+        <source src="assets/showcase-tour.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
